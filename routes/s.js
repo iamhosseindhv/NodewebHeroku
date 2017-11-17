@@ -60,7 +60,7 @@ function renderSearchResultPage(res, query, cityName, isAuthenticated) {
     if (cityName) {
         query.location = cityName;
     }
-    const url = "http://localhost:3000/api/explore?" + queryString.stringify(query);
+    const url = "https://quiet-bayou-82843.herokuapp.com/api/explore?" + queryString.stringify(query);
     request(url, function (error, response, body) {
         if (response.statusCode === 200){
             const results = JSON.parse(body);
