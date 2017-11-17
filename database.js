@@ -5,8 +5,8 @@ var mysql = require('mysql');
 
 var pool = mysql.createPool({
     connectionLimit : 20,
-    host: 'us-cdbr-iron-east-05.cleardb.net',
-    user: 'b372441c3d3c7a',
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
     password: '589e4244',
     database : 'heroku_e3066e4346f4683'
 });
