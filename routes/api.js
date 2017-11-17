@@ -78,7 +78,7 @@ function getCityLocation(query) {
 //this function should return query results
 function makeNewQuery(query) {
     return new Promise(function(resolve, reject) {
-        var db = require('../database');
+        var getConnection = require('../database');
 
         //search with city coordinates
         const statement = getSqlStatement(query);
@@ -93,14 +93,16 @@ function makeNewQuery(query) {
         // console.log(sqlAll);
         const final = {};
 
-        db.createConnection(function (err, connection) {
+        getConnection(function (err, connection) {
+            if (err) throw err;
             connection.query(sqlCount, function (error, result) {
                 if (error) reject('some err getting total count');
                 final.listings_count = result[0].count;
                 connection.release();
             });
         });
-        db.createConnection(function (err, connection) {
+        getConnection(function (err, connection) {
+            if (err) throw err;
             connection.query(sqlAll, function (error, listings) {
                 if (error) reject('some err getting listings');
                 final.listings = listings;
@@ -116,7 +118,7 @@ function makeNewQuery(query) {
 
 function queryByMapCoordinates(ne_lat, ne_lng, sw_lat, sw_lng, query) {
     return new Promise(function(resolve, reject) {
-        var db = require('../database');
+        var getConnection = require('../database');
         var countStatement = "WHERE latitude BETWEEN " + sw_lat + " AND " + ne_lat + " AND longitude BETWEEN " + sw_lng + " AND " + ne_lng;
         // #1
         if (query.guests) {
@@ -146,14 +148,16 @@ function queryByMapCoordinates(ne_lat, ne_lng, sw_lat, sw_lng, query) {
         var sqlCount = "SELECT COUNT(*) AS 'count' FROM listing " + countStatement + ";";
         const final = {};
 
-        db.createConnection(function (err, connection) {
+        getConnection(function (err, connection) {
+            if (err) throw err;
             connection.query(sqlCount, function (error, result) {
                 if (error) reject('some err getting total count');
                 final.listings_count = result[0].count;
                 connection.release();
             });
         });
-        db.createConnection(function (err, connection) {
+        getConnection(function (err, connection) {
+            if (err) throw err;
             connection.query(sqlAll, function (error, listings) {
                 if (error) reject('some err getting listings');
                 final.listings = listings;
@@ -167,7 +171,6 @@ function queryByMapCoordinates(ne_lat, ne_lng, sw_lat, sw_lng, query) {
 
 function getSqlStatement(query){
     var countStatement = "";
-
     // #1
     if (query.coordinates) {
         const radius = 10; // km
