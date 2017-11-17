@@ -56,7 +56,7 @@ $(document).ready(function() {
     $('#logout-btn').click(function () {
         $.ajax({
             type: 'POST',
-            url: 'https://quiet-bayou-82843.herokuapp.com/authenticate/logout',
+            url: 'https://rentaly.herokuapp.com/authenticate/logout',
             success: function(data) {
                 //console.log(data.status);
                 location.reload();
@@ -141,7 +141,7 @@ function refresh(parameters) {
         parsed.location = splitted[2];
     }
     //now make ajax request and reload data
-    const url = "https://quiet-bayou-82843.herokuapp.com/api/explore?" + queryString.stringify(parsed);
+    const url = "https://rentaly.herokuapp.com/api/explore?" + queryString.stringify(parsed);
     myBundle.queryNewListings(url);
 }
 

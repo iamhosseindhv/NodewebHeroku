@@ -11,7 +11,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: 'https://quiet-bayou-82843.herokuapp.com/edit/new-listing',
+            url: 'https://rentaly.herokuapp.com/edit/new-listing',
             data: $("#my-form").serialize(),
             success: function(data) { handleFormSuccess(data); },
             error: function (data) { handleFormFailure(data); }
