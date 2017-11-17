@@ -71,7 +71,7 @@ function authenticateRequest(req, res, next) {
     // decode token
     if (token) {
         // verifies secret and checks exp
-        jwt.verify(token, process.env.JWT_SECRET, function(err, decoded) {
+        jwt.verify(token, "secret", function(err, decoded) {
             if (err) {
                 req.isAuthenticated = false; // falsy or expired token
                 next();
