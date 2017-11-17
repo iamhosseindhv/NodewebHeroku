@@ -95,6 +95,20 @@
      </div>
 
      <div class="gap" style="height: 50px;"></div>
+    
+     <script>
+         customiseHeader();
+         function customiseHeader() {
+             const isAuthenticated = <%= isAuthenticated %>;
+             if (isAuthenticated){
+                 $('#login-signin-btn').hide();
+             } else {
+                 $('#logout-btn').hide();
+                 $('#rooms-btn').hide();
+                 $('#profile-btn').hide();
+                 $('#profile-img').hide();
+            }
+        }</script>
 
      <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYmqhY-KcOz1kHrx6JlKK7QgsloTZNRp8&callback=initMap"></script>
 </body>
