@@ -1,0 +1,601 @@
+
+body {
+    margin: 0;
+    padding: 0;
+    height:100%;
+    width:100%;
+    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
+
+.grid {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    flex-flow: row wrap;
+    margin: 0 auto;
+    -webkit-align-items: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+    padding: 8px;
+}
+.cell {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.box {
+    position: relative;
+    padding-top: 75%;
+    width: 100%;
+}
+.marginless {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+.padding-free {
+    padding: 0 !important;
+}
+.margin-free {
+    margin: 0 !important;
+}
+.relative-positioned {
+    position: relative;
+}
+.waste {
+    display: none;
+    height: 50px;
+    border-bottom: 1px solid #dcdcdc;
+    background-color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 4;
+}
+.listing-scroll-summary {
+    height: 50px;
+    display: none;
+    width: 40%;
+}
+.listing-scroll-summary--inner {
+    box-sizing: border-box;
+    height: 50px;
+    overflow: hidden;
+    background-color: #595959;
+    color: #fff;
+    padding: 0 20px;
+    -webkit-transition: padding-top .3s , background-color .3s .05s;
+    -moz-transition: padding-top .3s, background-color .3s .05s;
+    -ms-transition: padding-top .3s, background-color .3s .05s;
+    -o-transition: padding-top .3s, background-color .3s .05s;
+    transition: padding-top .3s, background-color .3s 0.05s;
+}
+.listing-scroll-summary--inner span:first-child {
+    font-weight: bold;
+    font-size: 20px;
+    letter-spacing: 1px;
+}
+.listing-scroll-summary--inner span:nth-child(2) {
+    font-size: 14px;
+}
+
+.listing-images {
+    position: relative;
+    background-color: #dcdcdc;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: 50% 50% !important;
+    width: 100%;
+    height: 320px;
+}
+
+.responsive-container {
+    width: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.column-6, .column-4, .column-full {
+    width: 100%;
+}
+
+.column-4 {
+    position: relative;
+    display: block;
+    background-color: #fff;
+}
+.newcol {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    /*height: 380px;*/
+    width: 100%;
+}
+.form {
+    border: solid 1px #dcdcdc;
+    border-top: none;
+}
+.gap {
+    height: 49px;
+    border-bottom: 1px solid #dcdcdc;
+    border-top: 1px solid transparent;
+    background-color: #fff;
+}
+.stick-bottom {
+    position: absolute;
+    bottom: 0;
+}
+.column-4--fixed {
+    position: fixed;
+    top: 0;
+}
+
+
+.innercol {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.header {
+    height: 50px;
+    width: 100%;
+    border-bottom: 1px solid #dcdcdc;
+    margin-bottom: 8px;
+    /*background-color: #fff;*/
+}
+.header-main {
+    box-sizing: border-box;
+    padding-left: 8px;
+    height: 50px;
+    overflow: hidden;
+    position: relative;
+    text-align: left;
+}
+.scl {
+    height: 60px;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling:touch;
+}
+.header-main a {
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #d9d9d9;
+    border-bottom: 3px solid white;
+    text-decoration: none;
+    padding: 10px 12px 7px 12px;
+    line-height: 31px;
+}
+.active {
+    color: #727272 !important;
+    font-weight: bold;
+    border-bottom-color: #ad974f !important;
+}
+
+
+.fixed {
+    position: fixed;
+    top: 0;
+    z-index: 5;
+}
+
+.rest {
+    padding: 0 20px 20px 20px;
+}
+
+.innercol-row {
+    /*border:1px solid red;*/
+    position: relative;
+    border-top: 1px solid #dcdcdc;
+    padding: 8px 11px;
+    margin-bottom: 40px;
+    color: #484848;
+    font-size: 16px;
+    line-height: 20px;
+}
+.border-free {
+    border: none;
+}
+.innercol--title-location, .innercol--overallreview, .innercol--hostname, .innercol--hostavatar {
+    /*background-color: aqua;*/
+    vertical-align: middle;
+    display: inline-block;
+    width: 100%;
+}
+
+
+.innercol--overallreview {
+    text-align: center;
+}
+.listing-title, .listing-hostname {
+    color: #484848;
+    font-weight: bold;
+    font-size: 34px;
+}
+.listing-location {
+    color: #767676;
+    margin: 12px 0;
+    font-size: 18px;
+}
+.listing-stars, .listing-overallreview, .listing-hostavatar {
+    display: inline-block;
+}
+.listing-stars--individual {
+    display: inline-block !important;
+    color: rgb(206, 196, 132);
+    font-size: 12px !important;
+    height: 22px !important;
+    width: 22px !important;
+    fill: currentcolor;
+}
+.listing-overallreview {
+    padding: 8px 21px;
+}
+.listing-properties {
+    position: relative;
+    box-sizing: border-box;
+    display: inline-block;
+    padding: 8px 11px;
+    width: calc(100% - 4px);
+    height: 100%;
+}
+.listing-properties:last-child {
+    border: none;
+    padding-bottom: 11px;
+}
+.listing-properties-title {
+    vertical-align: bottom;
+    display: inline-block;
+    margin-left: 16px;
+    color: #484848;
+    font-size: 15px;
+    line-height: 32px;
+}
+.listing-properties-img {
+    display: inline-block;
+    width: 32px;
+}
+.listing-properties-img img {
+    max-width: 100%;
+}
+
+
+.listing-description {
+    margin-top: 8px;
+}
+
+.innercol--hostavatar {
+    box-sizing: border-box;
+    text-align: center;
+}
+.listing-hostname {
+    line-height: normal;
+}
+.listing-hostregistrationdate {
+    color: #767676;
+    font-size: 15px;
+}
+.listing-hostavatar {
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: 50% 50% !important;
+    height: 128px;
+    width: 128px;
+    text-align: center;
+    background-color: #ededed;
+    border-radius: 50%;
+    margin: auto;
+}
+.innercol--hostbio, .innercol--hostcontact {
+    margin-top: 12px;
+    /*text-align: justify;*/
+}
+.listing-hostcontact {
+    background-color: #fff;
+    padding: 8px 21px;
+    border: 1px solid #ad974f;
+    border-radius: 3px;
+    transition: all 0.3s;
+}
+.listing-hostcontact:hover {
+    background-color: rgba(173, 151, 79, 0.2);
+    cursor: pointer;
+}
+
+
+.review-section {
+    margin-top: 12px;
+    background-color: #f2f2f2;
+    padding: 8px 11px;
+}
+.innercol-row-title {
+    position: absolute;
+    top: -9px;
+    left: 11px;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 2px;
+    padding: 0 4px;
+    background-color: #fff;
+    color: #727272;
+}
+.innercol--reviews {
+    /*background-color: aqua;*/
+    position: relative;
+    box-sizing: border-box;
+    display: inline-block;
+    border-bottom:1px solid #d9d9d9;
+    padding: 11px 11px 15px 11px;
+    width: calc(100% - 4px);
+}
+.innercol--reviews:last-child {
+    border: none;
+    padding-bottom: 11px;
+}
+.listing-reviews-title {
+    /*background-color: #fd5c63;*/
+    color: #484848;
+    font-size: 15px;
+}
+.innercol--reviews .listing-stars {
+    /*background-color: #933ec5;*/
+    position: absolute;
+    right: 8px;
+    display: inline-block;
+}
+
+.comment-section {
+    /*background-color: #fd5c63;*/
+    height:600px;
+}
+.comment {
+    background-color: purple;
+    height: 100px;
+    padding: 20px 0;
+    border-bottom: 1px solid #dcdcdc;
+}
+
+
+.map-container {
+    position:relative;
+    width: 100%;
+    margin-top: 50px;
+    padding-top: 12px;
+    border-top: 1px solid #dcdcdc;
+}
+.map {
+    height: 400px;
+}
+
+
+
+.booking-container {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height:55px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    text-align: center;
+    line-height: 55px;
+    color: #fff;
+    background-color: #ad974f;
+}
+
+/*booking area form*/
+#my-form {
+    width: 100%;
+}
+.content {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+}
+#my-form .form-row:first-child {
+    margin-top: 8px
+}
+#my-form .form-row:last-child {
+    padding: 0 12px;
+}
+.form-row {
+    box-sizing: border-box;
+    position: relative;
+    margin-top: 8px;
+    padding: 0 4px;
+    width: 100%;
+}
+.input-field:focus {
+    border: solid 1px #707070;
+}
+.input-field {
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 3px;
+    padding: 12px !important;
+    border: solid 1px #dcdcdc;
+    transition: border 0.3s;
+    line-height: 25px;
+    font-size: 16px;
+    outline: none;
+}
+.input-field::placeholder {
+    color: rgb(118, 118, 118);
+}
+.form-description {
+    color: #484848;
+    margin-bottom: 4px;
+    font-size: 17px;
+    white-space: normal;
+}
+.book-btn {
+    background-color: #ad974f !important;
+    padding: 12px 21px !important;
+    margin-bottom: 4px;
+    color: #fff;
+    width: 100%;
+    border-radius: 3px;
+    line-height: 25px;
+    font-size: 21px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.half-field {
+    display: inline-block;
+    width: 50%;
+}
+.share-btn, .heart-btn {
+    display: inline-block;
+    width: calc(50% - 6px);
+    text-align: center;
+    background-color: white;
+    margin-bottom: 8px;
+    color: #484848;
+    outline: none;
+    text-decoration: none !important;
+    cursor: pointer;
+}
+.share-btn {
+    border-right: 1px solid #dcdcdc;
+}
+.heart-btn {
+    border-left: 1px solid #dcdcdc;
+}
+.inner-link {
+    padding: 8px 16px 5px 16px;
+}
+.inner-link span {
+    vertical-align: top;
+    padding-left: 4px;
+}
+.icon {
+    transition: all 0.3s;
+    padding: 1px 4px;
+    fill: transparent;
+    width: 20px;
+    stroke-linejoin: round;
+}
+.share {
+    stroke: #484848;
+    stroke-width:10px;
+}
+.heart {
+    stroke: red;
+    stroke-width:2px;
+}
+
+
+.base-layer {
+    z-index: 9 !important;
+}
+.submit-btn {
+    background-color: #ad974f !important;
+    color: #fff;
+}
+.msg span {
+    color: #bfad73 !important;
+}
+
+@media (min-width: 560px){
+    .header-main {
+        padding-left: 20px;
+    }
+    .innercol--title-location, .innercol--hostname {
+        width: calc(60% - 3px);
+    }
+    .innercol--overallreview, .innercol--hostavatar {
+        width: calc(40% - 3px);
+    }
+    .listing-hostavatar {
+        margin: auto 20px auto auto;
+    }
+    .listing-stars, .listing-overallreview, .listing-hostavatar {
+        display: block;
+    }
+    .listing-properties {
+        width: calc(50% - 4px);
+    }
+    .listing-properties:nth-child(3) {
+        border: none;
+    }
+    .innercol--reviews {
+        width: calc(50% - 4px);
+    }
+    .innercol--reviews:nth-child(3) {
+        border: none;
+    }
+}
+
+
+@media (max-width: 743px){
+    .column-4 {
+        display: none;
+    }
+    .booking-container {
+        display: block;
+    }
+}
+
+@media (min-width: 744px){
+    .responsive-container {
+        width: 696px;
+    }
+    .listing-scroll-summary {
+        position: absolute;
+        display: block;
+        right: 20px;
+    }
+    .header-main {
+        max-width: 656px;
+    }
+    .column-6 {
+        width: 100%;
+    }
+    .column-4 {
+        width: 100%;
+    }
+    .listing-images {
+        height: 560px;
+    }
+
+}
+
+@media (min-width: 1128px){
+    .responsive-container {
+        width: 1080px;
+    }
+    .listing-scroll-summary {
+        position: relative;
+        display: block;
+        right: 0;
+    }
+    .listing-scroll-summary--inner {
+        padding-top: 50px;
+        background-color: #fff;
+    }
+    .header-main {
+        max-width: 648px;
+    }
+    .column-6 {
+        width: 60%;
+    }
+    .column-4 {
+        width: 40%;
+    }
+    .newcol {
+        width: 432px;
+    }
+}

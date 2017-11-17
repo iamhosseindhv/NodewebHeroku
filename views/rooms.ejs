@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <!--jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--vazir font-->
+    <link type="text/css" rel="stylesheet" href="https://cdn.rawgit.com/rastikerdar/vazir-font/v4.4.1/dist/font-face.css" />
+
+    <!--date picker stuff-->
+    <script type='text/javascript' src='/javascripts/kamadatepicker.min.js'></script>
+    <link rel='stylesheet' href='/stylesheets/searchResult/kamadatepicker.min.css'/>
+
+    <!--specific files-->
+    <link rel='stylesheet' href='/stylesheets/rooms.css' />
+    <!--javascripts-->
+    <script type='text/javascript' src='/javascripts/rooms.js'></script>
+
+
+</head>
+<body>
+    <% include partials/login.html %>
+    <% include ./partials/header.html %>
+
+    <div class="cell listing-images" style="background-image: url(<%= listing.thumbnail_img %>)"></div>
+    <!--<div class="cell listing-images" style="background-image: url('/images/owl.jpg')"></div>-->
+
+    <div class="waste">
+        <div class="responsive-container">
+            <div class="grid padding-free relative-positioned">
+                <div class="cell listing-scroll-summary">
+                    <div class="listing-scroll-summary--inner">
+                        <span>£<%= listing.price %></span> <span>per night</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="responsive-container">
+        <div class="grid padding-free">
+            <div class="cell column-4">
+                <div class="newcol">
+                    <div class="gap"></div>
+                    <div class="form grid">
+                        <form id="my-form" method="post" action="/booking">
+                            <div class="content">
+                                <div class="form-row">
+                                    <div class="grid">
+                                        <div class="cell half-field">
+                                            <div class="form-description"><span>Check-in</span></div>
+                                            <input readonly name="checkin" id="checkin" class="input-field" type="text" placeholder="dd/mm/yyyy" style="border-bottom-right-radius: 0; border-top-right-radius: 0">
+                                        </div>
+                                        <div class="cell half-field">
+                                            <div class="form-description"><span>Check-out</span></div>
+                                            <input readonly name="checkin" id="checkout" class="input-field" type="text" placeholder="dd/mm/yyyy" style="border-bottom-left-radius: 0; border-top-left-radius: 0">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="grid">
+                                        <div class="form-description"><span>Number of Guests</span></div>
+                                        <input name="max_guest" class="input-field" type="number" placeholder="Number of Guests">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="grid">
+                                        <div class="form-description"><span><b>Price: </b>£<%= listing.price %></span></div>
+                                    </div>
+                                </div>
+                                <div class="form-row margin-free">
+                                    <div class="grid">
+                                        <button type="submit" class="book-btn">Book</button>
+                                    </div>
+                                </div>
+                                <div class="form-row margin-free">
+                                    <div class="grid padding-free">
+                                        <a id="share-listing" href="/edit/sharelisting" class="share-btn">
+                                            <div class="inner-link">
+                                                <svg class="icon share" viewBox="0 0 458.624 458.624"><path xmlns="http://www.w3.org/2000/svg" d="M339.588,314.529c-14.215,0-27.456,4.133-38.621,11.239l-112.682-78.67c1.809-6.315,2.798-12.976,2.798-19.871    c0-6.896-0.989-13.557-2.798-19.871l109.64-76.547c11.764,8.356,26.133,13.286,41.662,13.286c39.79,0,72.047-32.257,72.047-72.047    C411.634,32.258,379.378,0,339.588,0c-39.79,0-72.047,32.257-72.047,72.047c0,5.255,0.578,10.373,1.646,15.308l-112.424,78.491    c-10.974-6.759-23.892-10.666-37.727-10.666c-39.79,0-72.047,32.257-72.047,72.047s32.256,72.047,72.047,72.047    c13.834,0,26.753-3.907,37.727-10.666l113.292,79.097c-1.629,6.017-2.514,12.34-2.514,18.872c0,39.79,32.257,72.047,72.047,72.047    c39.79,0,72.047-32.257,72.047-72.047C411.635,346.787,379.378,314.529,339.588,314.529z"/>
+                                                </svg>
+                                                <span id="share-detail">Share</span>
+                                            </div>
+                                        </a>
+                                        <a id="favourite-listing" href="/edit/add-listing-to-favourite" class="heart-btn">
+                                            <div class="inner-link">
+                                                <svg class="icon heart" viewBox="0 0 50 50"><path xmlns="http://www.w3.org/2000/svg" d="M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543  c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503  c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z"/>
+                                                </svg>
+                                                <span id="favourite-detail">Wish list</span>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id="<%= listing.id %>" class="cell column-6">
+                <div class="innercol">
+                    <div class="header">
+                        <nav class="header-main">
+                            <div class="scl">
+                                <a id="first-link" href="#details">Details</a>
+                                <a id="second-link" href="#host">Host</a>
+                                <a id="third-link" href="#reviews">Reviews</a>
+                                <a id="fourth-link" href="#location">Location</a>
+                            </div>
+                        </nav>
+                    </div>
+                    <div class="rest">
+                        <div id="details">
+                            <div class="innercol-row border-free">
+                                <div class="innercol--title-location">
+                                    <div class="listing-title"><%= listing.title %></div>
+                                    <div class="listing-location"><%= listing.location %></div>
+                                </div>
+                                <div class="innercol--overallreview">
+                                    <div class="listing-stars">
+                                        <span class="listing-stars--individual">
+                                            <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                            </svg>
+                                        </span>
+                                            <span class="listing-stars--individual">
+                                            <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                            </svg>
+                                        </span>
+                                            <span class="listing-stars--individual">
+                                            <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                            </svg>
+                                        </span>
+                                            <span class="listing-stars--individual">
+                                            <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                            </svg>
+                                        </span>
+                                            <span class="listing-stars--individual" style="color: #D8D8D8 !important;">
+                                            <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <div class="listing-overallreview">
+                                        <%= listing.review_count %> Reviews
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="innercol-row border-free margin-free">
+                                <div class="innercol--properties">
+                                    <div class="listing-properties">
+                                        <div class="listing-properties-img"><img src="/images/listingtype.png" alt="thumbnail"></div>
+                                        <div class="listing-properties-title"><%= listing.type %></div>
+                                    </div>
+                                    <div class="listing-properties">
+                                        <div class="listing-properties-img"><img src="/images/listingmaxguest.png" alt="thumbnail"></div>
+                                        <div class="listing-properties-title"><%= listing.max_guest %> Guest</div>
+                                    </div>
+                                    <div class="listing-properties">
+                                        <div class="listing-properties-img"><img src="/images/listingbedroom.png" alt="thumbnail"></div>
+                                        <div class="listing-properties-title"><%= listing.bedroom_count %> Bedrooms</div>
+                                    </div>
+                                    <div class="listing-properties">
+                                        <div class="listing-properties-img"><img src="/images/listingbed.png" alt="thumbnail"></div>
+                                        <div class="listing-properties-title"><%= listing.bed_count %> Beds</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="innercol-row border-free">
+                                <div class="listing-description"><%= listing.description %></div>
+                            </div>
+                        </div>
+                        <div id="host">
+                            <div class="innercol-row">
+                                <div class="innercol-row-title">Host Info</div>
+                                <div class="innercol--hostname">
+                                    <div class="listing-hostname"><%= host.firstname %> <%= host.surename %></div>
+                                    <div class="listing-hostregistrationdate">With us since <%= host.registration_month %> <%= host.registration_year %></div>
+                                </div>
+                                <div class="innercol--hostavatar">
+                                    <div class="listing-hostavatar" style="background-image: url(<%= host.profile_img %>)"></div>
+                                </div>
+                                <div class="innercol--hostbio">
+                                    <%= host.bio %>
+                                </div>
+                                <div class="innercol--hostcontact">
+                                    <button class="listing-hostcontact">Ask host a question</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="reviews">
+                            <div class="innercol-row padding-free margin-free">
+                                <div class="innercol-row-title">reviews</div>
+                                <div class="review-section">
+                                    <div class="innercol--reviews">
+                                        <span class="listing-reviews-title">As Described</span>
+                                        <div class="listing-stars">
+                                    <span class="listing-stars--individual">
+                                        <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                        </svg>
+                                    </span>
+                                            <span class="listing-stars--individual">
+                                        <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                        </svg>
+                                    </span>
+                                            <span class="listing-stars--individual">
+                                        <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                        </svg>
+                                    </span>
+                                            <span class="listing-stars--individual">
+                                        <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                        </svg>
+                                    </span>
+                                            <span class="listing-stars--individual" style="color: #D8D8D8 !important;">
+                                        <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                        </svg>
+                                    </span>
+                                        </div>
+                                    </div>
+                                    <div class="innercol--reviews">
+                                        <span class="listing-reviews-title">Cleanliness</span>
+                                        <div class="listing-stars">
+                                    <span class="listing-stars--individual">
+                                        <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                        </svg>
+                                    </span>
+                                            <span class="listing-stars--individual">
+                                        <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                        </svg>
+                                    </span>
+                                            <span class="listing-stars--individual">
+                                        <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                        </svg>
+                                    </span>
+                                            <span class="listing-stars--individual">
+                                        <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                        </svg>
+                                    </span>
+                                            <span class="listing-stars--individual" style="color: #D8D8D8 !important;">
+                                        <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                        </svg>
+                                    </span>
+                                        </div>
+                                    </div>
+                                    <div class="innercol--reviews">
+                                        <span class="listing-reviews-title">Location</span>
+                                        <div class="listing-stars">
+                                    <span class="listing-stars--individual">
+                                        <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                        </svg>
+                                    </span>
+                                            <span class="listing-stars--individual">
+                                        <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                        </svg>
+                                    </span>
+                                            <span class="listing-stars--individual">
+                                        <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                        </svg>
+                                    </span>
+                                            <span class="listing-stars--individual">
+                                        <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                        </svg>
+                                    </span>
+                                            <span class="listing-stars--individual" style="color: #D8D8D8 !important;">
+                                        <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                        </svg>
+                                    </span>
+                                        </div>
+                                    </div>
+                                    <div class="innercol--reviews">
+                                        <span class="listing-reviews-title">Value</span>
+                                        <div class="listing-stars">
+                                    <span class="listing-stars--individual">
+                                        <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                        </svg>
+                                    </span>
+                                            <span class="listing-stars--individual">
+                                        <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                        </svg>
+                                    </span>
+                                            <span class="listing-stars--individual">
+                                        <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                        </svg>
+                                    </span>
+                                            <span class="listing-stars--individual">
+                                        <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                        </svg>
+                                    </span>
+                                            <span class="listing-stars--individual" style="color: #D8D8D8 !important;">
+                                        <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                        </svg>
+                                    </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="map-container">
+                <div class="innercol-row-title">Location</div>
+                <div id="location" class="cell column-full map">
+                    <div id="map" style="height: 100%; width: 100%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <% include partials/footer.html %>
+
+
+    <div class="booking-container">Booking here</div>
+
+
+    <script>
+        function drawMarker() {
+            newMarker(<%= listing.latitude %>, <%= listing.longitude %>);
+        }
+
+        customiseHeader();
+        function customiseHeader() {
+            const isAuthenticated = <%= isAuthenticated %>;
+            if (isAuthenticated){
+                $('#login-signin-btn').hide();
+            } else {
+                $('#logout-btn').hide();
+                $('#rooms-btn').hide();
+                $('#profile-btn').hide();
+                $('#profile-img').hide();
+            }
+        }
+
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYmqhY-KcOz1kHrx6JlKK7QgsloTZNRp8&callback=initMap" onload="drawMarker()"></script>
+
+</body>
+</html>

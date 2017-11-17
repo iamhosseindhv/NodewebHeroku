@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <!--jQuery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--vazir font-->
+    <link type="text/css" rel="stylesheet" href="https://cdn.rawgit.com/rastikerdar/vazir-font/v4.4.1/dist/font-face.css" />
+
+    <link rel='stylesheet' href='/stylesheets/searchResult/searchResult.css'/>
+    <script type='text/javascript' src='/javascripts/searchMap/searchMapHandler-bundle.js'></script>
+    <script type='text/javascript' src='/javascripts/searchMap/searchMap.js'></script>
+    <script type='text/javascript' src='/javascripts/searchResult-bundle.js'></script>
+
+    <!--date picker stuff-->
+    <script type='text/javascript' src='/javascripts/kamadatepicker.min.js'></script>
+    <link rel='stylesheet' href='/stylesheets/searchResult/kamadatepicker.min.css'/>
+
+    <!--google maps api-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!--mdl for footer-->
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">-->
+    <!--google material design components-->
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+
+</head>
+<body>
+    <% include partials/login.html %>
+
+    <div class="head">
+        <div class="grid" style="direction: rtl;">
+            <div class="barWrapper-1">
+                <input id="autocomplete" placeholder="Enter your address" type="text" value="<%= location %>">
+            </div>
+            <div class="barWrapper-2">
+                <span>
+                    <input readonly type="text" id="to-date" placeholder="Check-out">
+                </span>
+                <span>
+                    <input readonly type="text" id="from-date" placeholder="Check-in">
+                </span>
+                <span>
+                    <button class="search-btn" onclick="myModule.searchDates()">Search</button>
+                </span>
+            </div>
+            <div class="barWrapper-3">
+                <select id="guestPicker" class="input-select">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                </select>
+                <span class="dropdown-icon">
+                    <svg viewBox="0 0 18 18" role="presentation" aria-hidden="true" focusable="false" style="display:block; fill:#484848; height:12px; width:12px;">
+                        <path fill-rule="evenodd" d="M16.291 4.295a1 1 0 1 1 1.414 1.415l-8 7.995a1 1 0 0 1-1.414 0l-8-7.995a1 1 0 1 1 1.414-1.415l7.293 7.29 7.293-7.29z"></path>
+                    </svg>
+                </span>
+            </div>
+            <div class="barWrapper-4">
+                <ul>
+                    <li class="head-li">
+                        <% if (isAuthenticated) { %>
+                        <span class="head-item" id="logout-btn">Logout</span>
+                        <% } else { %>
+                        <span class="head-item" id="login-signin-btn">Login / Sign Up</span>
+                        <% } %>
+                    </li>
+                    <li class="head-li" id="logo">
+                        <span class="head-item">LOGO HERE</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="content-wrap">
+        <div class="toggle-results-map">Map</div>
+
+        <!--fetch results here-->
+        <div id="main-wrap">
+            <div class="overlay"></div>
+            <div id="main" class="grid">
+                <% listings.forEach(function(record){ %>
+                <div id="<%= record.id %>" class="cell result-cell">
+                    <a href=<%= "../../rooms/" + record.id + "?"%>>
+                        <div class="box">
+                            <div class="margin-free">
+                                <div class="cell-thumbnail">
+                                    <img class="margin-free" src= <%= record.thumbnail_img %>>
+                                    <!--<img class="margin-free" src="/images/owl.jpg">-->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cell-info">
+                            <div class="cell-info-detail">
+                                <div class="cell-info--row">
+                                    <span class="cell-info--price">£<%= record.price %></span>
+                                    <span class="cell-info--title"><%= record.title %></span>
+                                </div>
+                                <div class="cell-info--row">
+                                    <span class="cell-info--type"><%= record.type %></span>
+                                    <span class="cell-info--bedroomCount"><%= record.bedroom_count %> Bedroom</span>
+                                </div>
+                                <div class="cell-info--row">
+                                    <div class="cell-info--review-stars">
+                                        <span class="review-stars--individual">
+                                            <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                            </svg>
+                                        </span>
+                                        <span class="review-stars--individual">
+                                            <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                            </svg>
+                                        </span>
+                                        <span class="review-stars--individual">
+                                            <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                            </svg>
+                                        </span>
+                                        <span class="review-stars--individual">
+                                            <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                            </svg>
+                                        </span>
+                                        <span class="review-stars--individual" style="color: #D8D8D8 !important;">
+                                            <svg viewBox="0 0 1000 1000" role="presentation" focusable="false"><path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z"></path>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                    <div class="cell-info--review-count"><%= record.review_count %> reviews</div>
+                                </div>
+                            </div>
+                            <div class="cell-info-heart">
+                                <svg class="icon-heart" viewBox="0 0 50 50"><path xmlns="http://www.w3.org/2000/svg" d="M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543  c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503  c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <% }); %>
+            </div>
+            <!--pagination goes here-->
+            <div id="pagination"></div>
+
+            <!--footer goes here-->
+            <footer class="mdl-mini-footer">
+                <div class="mdl-mini-footer__left-section">
+                    <div class="mdl-logo">Title</div>
+                    <ul class="mdl-mini-footer__link-list">
+                        <li><a href="#">Terms of Use</a></li>
+                        <li><a href="#">Privacy & Policy</a></li>
+                        <li><a href="#" id="footer-listing-count"><%= listings_count %></a></li>
+                    </ul>
+                </div>
+            </footer>
+        </div>
+
+        <!--map goes here-->
+        <div id="sidebar-wrap"><div id="map"></div></div>
+
+    </div>
+
+
+
+
+
+    <script>
+        function mapLoaded() {
+            <% listings.forEach(function(record){ %>
+            createMarker(<%= record.latitude %>, <%= record.longitude %>, <%= record.id %>);
+            <% }); %>
+            fitMarkers();
+        }
+        myModule.createPagination(<%= listings_count %>);
+
+
+
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYmqhY-KcOz1kHrx6JlKK7Qgsl
+    oTZNRp8&libraries=places&callback=initAutocomplete" onload="mapLoaded()"></script>
+
+
+</body>
+</html>
+
