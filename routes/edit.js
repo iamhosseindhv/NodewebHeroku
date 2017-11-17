@@ -37,21 +37,25 @@ router.post('/new-listing', isAuthenticated, function (req, res, next) {
         const user_id = req.user.id;
         const creation_date = getTodayDate();
 
-        const db = require('../database');
+        var getConnection = require('../database');
         const statement = 'INSERT INTO listing ' +
             '(location, price, title, type, bed_count, bedroom_count, bathroom_count, max_guest, longitude, latitude, user_id, creation_date, full_address) ' +
             'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?, ?, ?)';
-        db.query(statement, [location, price, title, type, bed_count, bedroom_count, bathroom_count, max_guest, longitude, latitude, user_id, creation_date, full_address], function (err) {
-            if (err) {
-                throw err;
-            } else {
-                const response = {
-                    success: true,
-                    message: null,
-                    isValidInputs: true
-                };
-                res.send(response);
-            }
+        getConnection(function (err, connection) {
+            if (err) throw err;
+            connection.query(statement, [location, price, title, type, bed_count, bedroom_count, bathroom_count, max_guest, longitude, latitude, user_id, creation_date, full_address], function (err) {
+                if (err) {
+                    throw err;
+                } else {
+                    const response = {
+                        success: true,
+                        message: null,
+                        isValidInputs: true
+                    };
+                    connection.release();
+                    res.send(response);
+                }
+            });
         });
     }
 });
@@ -67,23 +71,27 @@ router.post('/add-listing-to-favourite', function (req, res, next) {
         //TODO: validate listingID
         const listing_id = req.body.listingid;
         const user_id = req.user.id;
-        const db = require('../database');
-        db.query('INSERT INTO favourited (user_id, listing_id) VALUES (?, ?)', [user_id, listing_id], function (err) {
-            if (err) {
-                if (err.code = 'ER_DUP_ENTRY') {
+        var getConnection = require('../database');
+        getConnection(function (err, connection) {
+            if (err) throw err;
+            connection.query('INSERT INTO favourited (user_id, listing_id) VALUES (?, ?)', [user_id, listing_id], function (err) {
+                if (err) {
+                    if (err.code = 'ER_DUP_ENTRY') {
+                        res.json({
+                            presentLogin: false,
+                            favourited: false,
+                            message: 'Listing already added to favourite list'
+                        });
+                    }
+                }
+                else {
                     res.json({
                         presentLogin: false,
-                        favourited: false,
-                        message: 'Listing already added to favourite list'
+                        favourited: true
                     });
                 }
-            }
-            else {
-                res.json({
-                    presentLogin: false,
-                    favourited: true
-                });
-            }
+                connection.release();
+            });
         });
     }
 });
