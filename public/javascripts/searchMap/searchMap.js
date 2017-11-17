@@ -149,7 +149,7 @@ function clearMarkers() {
 function resultCellHovered(id) {
     for (var i=0; i<markers.length; i++){
         if (markers[i].id == id){
-            markers[i].setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+            markers[i].setIcon('https://maps.google.com/mapfiles/ms/icons/green-dot.png');
         }
     }
 }
