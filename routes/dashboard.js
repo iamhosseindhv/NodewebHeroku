@@ -40,13 +40,18 @@ router.get('/:tab', isAuthenticated, function(req, res) {
 
 
 function handleRooms(properties, callback) {
-    const db = require('../database');
     properties.title = 'Rooms';
-    db.query('SELECT * FROM listing WHERE user_id = ?', [properties.user.id], function (err, results) {
+
+    var getConnection = require('../database');
+    getConnection(function (err, connection) {
         if (err) throw err;
-        properties.my_listings = results;
-        properties.my_listings_count = results.length;
-        callback(properties);
+        connection.query('SELECT * FROM listing WHERE user_id = ?', [properties.user.id], function (error, results) {
+            if (error) throw err;
+            properties.my_listings = results;
+            properties.my_listings_count = results.length;
+            connection.release();
+            callback(properties);
+        });
     });
 }
 

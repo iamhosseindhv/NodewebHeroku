@@ -41,8 +41,8 @@ router.post('/new-listing', isAuthenticated, function (req, res, next) {
         const statement = 'INSERT INTO listing ' +
             '(location, price, title, type, bed_count, bedroom_count, bathroom_count, max_guest, longitude, latitude, user_id, creation_date, full_address) ' +
             'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ? , ?, ?, ?)';
-        getConnection(function (err, connection) {
-            if (err) throw err;
+        getConnection(function (er, connection) {
+            if (er) throw er;
             connection.query(statement, [location, price, title, type, bed_count, bedroom_count, bathroom_count, max_guest, longitude, latitude, user_id, creation_date, full_address], function (err) {
                 if (err) {
                     throw err;
@@ -72,8 +72,8 @@ router.post('/add-listing-to-favourite', function (req, res, next) {
         const listing_id = req.body.listingid;
         const user_id = req.user.id;
         var getConnection = require('../database');
-        getConnection(function (err, connection) {
-            if (err) throw err;
+        getConnection(function (error, connection) {
+            if (error) throw error;
             connection.query('INSERT INTO favourited (user_id, listing_id) VALUES (?, ?)', [user_id, listing_id], function (err) {
                 if (err) {
                     if (err.code = 'ER_DUP_ENTRY') {

@@ -35,66 +35,69 @@ router.post('/', function(req, res, next) {
         const email = req.body.email;
         const password = req.body.password;
 
-        const db = require('../database');
-        db.query("SELECT id, password FROM users WHERE email = ?", [email], function (err, results) {
+        var getConnection = require('../database');
+        getConnection(function (err, connection) {
             if (err) throw err;
+            connection.query("SELECT id, password FROM users WHERE email = ?", [email], function (error, results) {
+                if (error) throw error;
+                //no user with such username found
+                if (results.length === 0){
+                    const errors = {
+                        emails: [{description: 'Email not found. Please try again.'}],
+                        passwords: [],
+                        passwordMatches: []
+                    };
+                    const response = {
+                        success: false,
+                        status: 'Authentication failed.',
+                        message: errors,
+                        isValidInputs: true
+                    };
+                    res.json(response);
 
-            //no user with such username found
-            if (results.length === 0){
-                const errors = {
-                    emails: [{description: 'Email not found. Please try again.'}],
-                    passwords: [],
-                    passwordMatches: []
-                };
-                const response = {
-                    success: false,
-                    status: 'Authentication failed.',
-                    message: errors,
-                    isValidInputs: true
-                };
-                res.json(response);
+                } else {
+                    //there is a user, let's check the entered password
+                    const hash = results[0].password.toString();
+                    bcrypt.compare(password, hash, function (err, response) {
+                        if (err) throw err;
 
-            } else {
-                //there is a user, let's check the entered password
-                const hash = results[0].password.toString();
-                bcrypt.compare(password, hash, function (err, response) {
-                    if (err) throw err;
+                        // correct password, create a token, send it through cookie, send response
+                        if (response === true){
+                            const user = {
+                                user_id: results[0].id
+                            };
+                            const token = jwt.sign(user, "secret", {
+                                expiresIn: 2400000 // expires in 40min
+                            });
+                            req.session.token = token;
+                            const response = {
+                                success: true,
+                                status: 'Authentication successful.',
+                                message: '',
+                                no_err: true,
+                                isValidInputs: true
+                            };
+                            res.json(response);
 
-                    // correct password, create a token, send it through cookie, send response
-                    if (response === true){
-                        const user = {
-                            user_id: results[0].id
-                        };
-                        const token = jwt.sign(user, "secret", {
-                            expiresIn: 2400000 // expires in 40min
-                        });
-                        req.session.token = token;
-                        const response = {
-                            success: true,
-                            status: 'Authentication successful.',
-                            message: '',
-                            no_err: true,
-                            isValidInputs: true
-                        };
-                        res.json(response);
-
-                    } else {
-                        //wrong password, authentication failed
-                        const errors = {
-                            emails: [],
-                            passwords: [{description: 'Wrong Password. Please try again.'}],
-                            passwordMatches: []
-                        };
-                        const response = {
-                            success: false,
-                            status: 'Authentication failed.',
-                            message: errors,
-                            isValidInputs: true
-                        };
-                        res.json(response);
-                    }
-                });
-            }
+                        } else {
+                            //wrong password, authentication failed
+                            const errors = {
+                                emails: [],
+                                passwords: [{description: 'Wrong Password. Please try again.'}],
+                                passwordMatches: []
+                            };
+                            const response = {
+                                success: false,
+                                status: 'Authentication failed.',
+                                message: errors,
+                                isValidInputs: true
+                            };
+                            res.json(response);
+                        }
+                    });
+                }
+                connection.release();
+            });
         });
     }
 });
@@ -116,38 +119,42 @@ router.post('/create', function (req, res, next) {
 
         const email = req.body.email;
         const password = req.body.password;
-        const db = require('../database');
+        var getConnection = require('../database');
         //hash password
         bcrypt.hash(password, saltRounds, function (err, hashedPassword) {
             //add newly created user to the database
-            db.query('INSERT INTO users (email, password) VALUES (?, ?)', [email, hashedPassword], function (err) {
-                if (err) {
-                    if (err.code = 'ER_DUP_ENTRY') {
-                        const errors = {
-                            emails: [{description: 'Email already exists. Please enter another email.'}],
-                            passwords: [],
-                            passwordMatches: []
-                        };
+            getConnection(function (error, connection) {
+                if (error) throw error;
+                connection.query('INSERT INTO users (email, password) VALUES (?, ?)', [email, hashedPassword], function (err) {
+                    if (err) {
+                        if (err.code = 'ER_DUP_ENTRY') {
+                            const errors = {
+                                emails: [{description: 'Email already exists. Please enter another email.'}],
+                                passwords: [],
+                                passwordMatches: []
+                            };
+                            const response = {
+                                success: false,
+                                status: 'Authentication failed.',
+                                message: errors,
+                                isValidInputs: true
+                            };
+                            res.send(response);
+                        } else {
+                            throw err; //any other error other than duplicate email
+                        }
+                    } else {
                         const response = {
-                            success: false,
-                            status: 'Authentication failed.',
-                            message: errors,
+                            success: true,
+                            status: 'Authentication successful.',
+                            message: 'User successfully created.',
+                            no_err: true,
                             isValidInputs: true
                         };
                         res.send(response);
-                    } else {
-                        throw err; //any other error other than duplicate email
                     }
-                } else {
-                    const response = {
-                        success: true,
-                        status: 'Authentication successful.',
-                        message: 'User successfully created.',
-                        no_err: true,
-                        isValidInputs: true
-                    };
-                    res.send(response);
-                }
+                    connection.release();
+                });
             });
         });
     }
