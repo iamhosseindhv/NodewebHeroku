@@ -7,8 +7,8 @@ var pool = mysql.createPool({
     connectionLimit : 20,
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
-    password: '589e4244',
-    database : 'heroku_e3066e4346f4683'
+    password: process.env.DB_PASSWORD,
+    database : process.env.DB_DATABASE
 });
 
 var getConnection = function (cb) {
