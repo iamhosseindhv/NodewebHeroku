@@ -3,13 +3,14 @@
  */
 var mysql = require('mysql');
 
-var connection = mysql.createConnection({
+var pool = mysql.createPool({
+    connectionLimit : 20,
     host: 'us-cdbr-iron-east-05.cleardb.net',
     user: 'b372441c3d3c7a',
     password: '589e4244',
     database : 'heroku_e3066e4346f4683'
 });
-connection.connect();
+// connection.connect();
 
 
-module.exports = connection;
+module.exports = pool;

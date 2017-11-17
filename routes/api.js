@@ -92,14 +92,21 @@ function makeNewQuery(query) {
         sqlCount += statement.countStatement + ";";
         // console.log(sqlAll);
         const final = {};
-        db.query(sqlCount, function (error, result) {
-            if (error) reject('some err getting total count');
-            final.listings_count = result[0].count;
+
+        db.createConnection(function (err, connection) {
+            connection.query(sqlCount, function (error, result) {
+                if (error) reject('some err getting total count');
+                final.listings_count = result[0].count;
+                connection.release();
+            });
         });
-        db.query(sqlAll, function (error, listings) {
-            if (error) reject('some err getting listings');
-            final.listings = listings;
-            resolve(final);
+        db.createConnection(function (err, connection) {
+            connection.query(sqlAll, function (error, listings) {
+                if (error) reject('some err getting listings');
+                final.listings = listings;
+                connection.release();
+                resolve(final);
+            });
         });
 
     });
@@ -138,14 +145,21 @@ function queryByMapCoordinates(ne_lat, ne_lng, sw_lat, sw_lng, query) {
         var sqlAll = "SELECT * FROM listing " + listingStatement + ";";
         var sqlCount = "SELECT COUNT(*) AS 'count' FROM listing " + countStatement + ";";
         const final = {};
-        db.query(sqlCount, function (error, result) {
-            if (error) reject('some err getting total count');
-            final.listings_count = result[0].count;
+
+        db.createConnection(function (err, connection) {
+            connection.query(sqlCount, function (error, result) {
+                if (error) reject('some err getting total count');
+                final.listings_count = result[0].count;
+                connection.release();
+            });
         });
-        db.query(sqlAll, function (error, listings) {
-            if (error) reject('some err getting listings');
-            final.listings = listings;
-            resolve(final);
+        db.createConnection(function (err, connection) {
+            connection.query(sqlAll, function (error, listings) {
+                if (error) reject('some err getting listings');
+                final.listings = listings;
+                connection.release();
+                resolve(final);
+            });
         });
     });
 }
