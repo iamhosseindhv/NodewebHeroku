@@ -94,10 +94,14 @@ function authenticateRequest(req, res, next) {
 
 
 function getUserInfo(id, callback) {
-    const db = require('./database');
-    db.query('SELECT * FROM users WHERE id = ?', [id], function (err, result) {
-        if (err) throw err;
-        callback(result[0]);
+    var getConnection = require('../database');
+    getConnection(function (error, connection) {
+        if (error) throw error;
+        connection.query('SELECT * FROM users WHERE id = ?', [id], function (err, result) {
+            if (err) throw err;
+            connection.release();
+            callback(result[0]);
+        });
     });
 }
 
