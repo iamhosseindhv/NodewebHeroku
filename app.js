@@ -33,7 +33,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cookieSession({ name: 'session', secret: process.env.COOKIE_SESSION_SECRET, maxAge: 40 * 60 * 1000 /* 40min */ }));
+app.use(cookieSession({ name: 'session', secret: "randomstringofchars", maxAge: 40 * 60 * 1000 /* 40min */ }));
 
 
 app.use(authenticateRequest);
