@@ -3,8 +3,7 @@
  */
 var mysql = require('mysql');
 
-var connection = mysql.createPool({
-    connectionLimit : 20,
+var connection = mysql.createConnection({
     host: 'us-cdbr-iron-east-05.cleardb.net',
     user: 'b372441c3d3c7a',
     password: '589e4244',
