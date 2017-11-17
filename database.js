@@ -21,7 +21,4 @@ var getConnection = function (cb) {
     });
 };
 
-// connection.connect();
-//module.exports = connection;
-
 module.exports = getConnection;
