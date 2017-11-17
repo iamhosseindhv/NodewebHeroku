@@ -3,7 +3,7 @@
  */
 
 $(document).ready(function(){
-    var formurl = '/authenticate/create';
+    var formurl = 'https://quiet-bayou-82843.herokuapp.com/authenticate/create';
 
     $('.close-btn').click(function () {
         $('.base-layer').css('display', 'none');
@@ -13,13 +13,13 @@ $(document).ready(function(){
     $('.login-msg').click(function () {
         toggleToLogin();
         $('#errors, #email-errors, #password-errors, #passwordMatch-errors').empty();
-        formurl = '/authenticate';
+        formurl = 'https://quiet-bayou-82843.herokuapp.com/authenticate';
 
     });
     $('.signup-msg').click(function () {
         toggleToSignup();
         $('#errors, #email-errors, #password-errors, #passwordMatch-errors').empty();
-        formurl = '/authenticate/create';
+        formurl = 'https://quiet-bayou-82843.herokuapp.com/authenticate/create';
     });
 
 

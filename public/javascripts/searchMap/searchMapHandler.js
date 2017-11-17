@@ -41,7 +41,7 @@ var doQueryFromSearchedAddress = function (selectedPlace) {
     //here instead of overwriting url which caused the whole page to reload,
     //you should make a AJAX call to only reload result section of the page
     parsed.location = formattedAddress;
-    const url = "http://localhost:3000/api/explore?" + queryString.stringify(parsed);
+    const url = "https://quiet-bayou-82843.herokuapp.com/api/explore?" + queryString.stringify(parsed);
     queryNewListings(url);
 };
 

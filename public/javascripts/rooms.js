@@ -78,7 +78,7 @@ $(document).ready(function () {
         const listingid = $(".column-6").attr('id');
         $.ajax({
             type: 'POST',
-            url: '/edit/add-listing-to-favourite',
+            url: 'https://quiet-bayou-82843.herokuapp.com/edit/add-listing-to-favourite',
             data: {
                 listingid: listingid
             },
