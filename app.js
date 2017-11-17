@@ -94,7 +94,7 @@ function authenticateRequest(req, res, next) {
 
 
 function getUserInfo(id, callback) {
-    var getConnection = require('../database');
+    var getConnection = require('./database');
     getConnection(function (error, connection) {
         if (error) throw error;
         connection.query('SELECT * FROM users WHERE id = ?', [id], function (err, result) {
