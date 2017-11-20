@@ -19,18 +19,16 @@ function storeWhoCameIn(req, res, next) {
         req.connection.socket.remoteAddress;
     var referrer = req.headers.referer;
     var ipString = 'ip: ' + ip;
-    var visitDate = new Date().toISOString()
-        .replace(/T/, ' ')
-        .replace(/\..+/, '');
-    console.log('visit date is: '+visitDate);
-    // var getConnection = require('../database');
-    // getConnection(function (error, connection) {
-    //     if (error) throw error;
-    //     connection.query('INSERT INTO visitors (ip, referrer, date) values (?, ?)', [ipString, referrer, visitDate], function (err) {
-    //         if (err) throw err;
-    //         connection.release();
-    //     });
-    // });
+    var visitDate = 'date:' + new Date().toISOString();
+    console.log('visit date is: ' + visitDate);
+    var getConnection = require('../database');
+    getConnection(function (error, connection) {
+        if (error) throw error;
+        connection.query('INSERT INTO visitors (ip, referrer, date) values (?, ?)', [ipString, referrer, visitDate], function (err) {
+            if (err) throw err;
+            connection.release();
+        });
+    });
     next();
 }
 
