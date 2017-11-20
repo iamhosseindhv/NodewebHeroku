@@ -36,6 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieSession({ name: 'session', secret: process.env.COOKIE_SESSION_SECRET, maxAge: 40 * 60 * 1000 /* 40min */ }));
 
 
+app.use(storeWhoCameIn);
 app.use(authenticateRequest);
 app.use('/', index);
 app.use('/s', s);
@@ -62,6 +63,22 @@ app.use(function(err, req, res, next) {
      res.status(err.status || 500);
      res.render('error');
 });
+
+function storeWhoCameIn(req, res, next) {
+    // var getConnection = require('./database');
+    // getConnection(function (error, connection) {
+    //     if (error) throw error;
+    //     connection.query('INSERT INTO  * FROM users WHERE id = ?', [id], function (err, result) {
+    //         if (err) throw err;
+    //         connection.release();
+    //     });
+    // });
+    var ip = req.headers['x-forwarded-for'].split(',').pop() ||
+        req.connection.remoteAddress ||
+        req.socket.remoteAddress ||
+        req.connection.socket.remoteAddress
+    console.log(ip);
+}
 
 
 function authenticateRequest(req, res, next) {
