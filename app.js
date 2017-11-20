@@ -78,6 +78,7 @@ function storeWhoCameIn(req, res, next) {
         req.socket.remoteAddress ||
         req.connection.socket.remoteAddress
     console.log(ip);
+    next();
 }
 
 
