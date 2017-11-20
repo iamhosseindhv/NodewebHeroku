@@ -20,7 +20,7 @@ function storeWhoCameIn(req, res, next) {
     var referrer = req.headers.referer;
     var ipString = 'ip: ' + ip;
     var visitDate = 'date:' + new Date().toISOString();
-    console.log('visit date is: ' + visitDate);
+    console.log(visitDate);
     var getConnection = require('../database');
     getConnection(function (error, connection) {
         if (error) throw error;
