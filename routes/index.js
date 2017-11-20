@@ -22,14 +22,15 @@ function storeWhoCameIn(req, res, next) {
     var visitDate = new Date().toISOString()
         .replace(/T/, ' ')
         .replace(/\..+/, '');
-    var getConnection = require('../database');
-    getConnection(function (error, connection) {
-        if (error) throw error;
-        connection.query('INSERT INTO visitors (ip, referrer, date) values (?, ?)', [ipString, referrer, visitDate], function (err) {
-            if (err) throw err;
-            connection.release();
-        });
-    });
+    console.log('visit date is: '+visitDate);
+    // var getConnection = require('../database');
+    // getConnection(function (error, connection) {
+    //     if (error) throw error;
+    //     connection.query('INSERT INTO visitors (ip, referrer, date) values (?, ?)', [ipString, referrer, visitDate], function (err) {
+    //         if (err) throw err;
+    //         connection.release();
+    //     });
+    // });
     next();
 }
 
