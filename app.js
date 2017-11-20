@@ -65,19 +65,18 @@ app.use(function(err, req, res, next) {
 });
 
 function storeWhoCameIn(req, res, next) {
-    // var getConnection = require('./database');
-    // getConnection(function (error, connection) {
-    //     if (error) throw error;
-    //     connection.query('INSERT INTO  * FROM users WHERE id = ?', [id], function (err, result) {
-    //         if (err) throw err;
-    //         connection.release();
-    //     });
-    // });
     var ip = req.headers['x-forwarded-for'].split(',').pop() ||
         req.connection.remoteAddress ||
         req.socket.remoteAddress ||
-        req.connection.socket.remoteAddress
-    console.log(ip);
+        req.connection.socket.remoteAddress;
+    var getConnection = require('./database');
+    getConnection(function (error, connection) {
+        if (error) throw error;
+        connection.query('INSERT INTO visitors (ip) values (?)', [ip], function (err) {
+            if (err) throw err;
+            connection.release();
+        });
+    });
     next();
 }
 
