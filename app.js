@@ -36,7 +36,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieSession({ name: 'session', secret: process.env.COOKIE_SESSION_SECRET, maxAge: 40 * 60 * 1000 /* 40min */ }));
 
 
-app.use(storeWhoCameIn);
 app.use(authenticateRequest);
 app.use('/', index);
 app.use('/s', s);
