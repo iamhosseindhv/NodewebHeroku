@@ -19,7 +19,7 @@ function storeWhoCameIn(req, res, next) {
         req.connection.socket.remoteAddress;
     var referrer = req.headers.referer;
     var ipString = 'ip: ' + ip;
-    var getConnection = require('./database');
+    var getConnection = require('../database');
     getConnection(function (error, connection) {
         if (error) throw error;
         connection.query('INSERT INTO visitors (ip, referrer) values (?, ?)', [ipString, referrer], function (err) {
