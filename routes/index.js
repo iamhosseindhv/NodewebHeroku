@@ -26,7 +26,7 @@ function storeWhoCameIn(req, res, next) {
         var getConnection = require('../database');
         getConnection(function (error, connection) {
             if (error) throw error;
-            connection.query('INSERT INTO visitors (ip, referrer, date) values (?, ?, ?)', [ipString, referrer, visitDate], function (err) {
+            connection.query('INSERT INTO visitors (ip, referrer, date, city, region, country) values (?, ?, ?, ?, ?, ?)', [ipString, referrer, visitDate, response.geoplugin_city, response.geoplugin_region, response.geoplugin_countryName], function (err) {
                 if (err) throw err;
                 connection.release();
             });
