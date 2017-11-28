@@ -18,6 +18,16 @@ function storeWhoCameIn(req, res, next) {
         req.socket.remoteAddress ||
         req.connection.socket.remoteAddress;
     var referrer = req.headers.referer;
+    const url = 'http://www.geoplugin.net/json.gp?ip=' + ip;
+    request(url, function (error, response, body) {
+        if (response.statusCode === 200){
+            const res = JSON.parse(body);
+            console.log(res);
+        } else {
+            console.log(response.statusCode);
+            console.log('error:', error);
+        }
+    });
     var ipString = 'ip: ' + ip;
     var visitDate = 'date:' + new Date().toISOString()
             .replace(/T/, ' ')
