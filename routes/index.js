@@ -31,8 +31,8 @@ function storeWhoCameIn(req, res, next) {
                 connection.release();
             });
         });
-        next();
     });
+    next();
 }
 
 function getLocInfo(ip, callback) {
@@ -44,14 +44,16 @@ function getLocInfo(ip, callback) {
                 var response = {};
                 response.geoplugin_city = res.geoplugin_city;
                 response.geoplugin_region = res.geoplugin_region;
-                response.countryName = res.countryName;
+                response.geoplugin_countryName = res.geoplugin_countryName;
                 callback(response);
+            } else {
+                callback(null);
             }
         } else {
             console.log(response.statusCode);
             console.log('error:', error);
+            callback(null);
         }
-        callback(null);
     });
 }
 
