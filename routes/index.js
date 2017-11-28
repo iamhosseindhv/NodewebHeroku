@@ -36,23 +36,27 @@ function storeWhoCameIn(req, res, next) {
 }
 
 function getLocInfo(ip, callback) {
+    var locInfo = {
+        geoplugin_city: '',
+        geoplugin_region: '',
+        geoplugin_countryName: ''
+    };
     const url = 'http://www.geoplugin.net/json.gp?ip=' + ip;
     request(url, function (error, response, body) {
         if (response.statusCode === 200){
             const res = JSON.parse(body);
             if (res.geoplugin_status === 200){
-                var response = {};
-                response.geoplugin_city = res.geoplugin_city;
-                response.geoplugin_region = res.geoplugin_region;
-                response.geoplugin_countryName = res.geoplugin_countryName;
-                callback(response);
+                locInfo.geoplugin_city = res.geoplugin_city;
+                locInfo.geoplugin_region = res.geoplugin_region;
+                locInfo.geoplugin_countryName = res.geoplugin_countryName;
+                callback(locInfo);
             } else {
-                callback(null);
+                callback(locInfo);
             }
         } else {
             console.log(response.statusCode);
             console.log('error:', error);
-            callback(null);
+            callback(locInfo);
         }
     });
 }
