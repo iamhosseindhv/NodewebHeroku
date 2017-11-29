@@ -22,11 +22,10 @@ function storeWhoCameIn(req, res, next) {
     var referrer = req.headers.referer;
     var visitDate = 'date:' + new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
     getLocInfo(ip, function (response) {
-        console.log(response);
-        var getConnection = require('../database');
+        var getConnection = require('./database');
         getConnection(function (error, connection) {
             if (error) throw error;
-            connection.query('INSERT INTO visitors (ip, referrer, date, city, region, country) values (?, ?, ?, ?, ?, ?)', [ipString, referrer, visitDate, response.geoplugin_city, response.geoplugin_region, response.geoplugin_countryName], function (err) {
+            connection.query('INSERT INTO visitors (ip, referrer, date, city, region, country, lat, lng) values (?, ?, ?, ?, ?, ?, ?, ?)', [ipString, referrer, visitDate, response.geoplugin_city, response.geoplugin_region, response.geoplugin_countryName, response.geoplugin_latitude, response.geoplugin_longitude], function (err) {
                 if (err) throw err;
                 connection.release();
             });
@@ -39,7 +38,9 @@ function getLocInfo(ip, callback) {
     var locInfo = {
         geoplugin_city: '',
         geoplugin_region: '',
-        geoplugin_countryName: ''
+        geoplugin_countryName: '',
+        geoplugin_latitude: '',
+        geoplugin_longitude: ''
     };
     const url = 'http://www.geoplugin.net/json.gp?ip=' + ip;
     request(url, function (error, response, body) {
@@ -49,6 +50,8 @@ function getLocInfo(ip, callback) {
                 locInfo.geoplugin_city = res.geoplugin_city;
                 locInfo.geoplugin_region = res.geoplugin_region;
                 locInfo.geoplugin_countryName = res.geoplugin_countryName;
+                locInfo.geoplugin_latitude = res.geoplugin_latitude;
+                locInfo.geoplugin_longitude = res.geoplugin_longitude;
                 callback(locInfo);
             } else {
                 callback(locInfo);
