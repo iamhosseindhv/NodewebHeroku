@@ -19,6 +19,7 @@ router.get('/:id', function(req, res, next) {
     // for the purpose of demonstration, we redirect to one of these random pages
     const min = 0, max = 2;
     const randomPageAmoung3 = Math.floor(Math.random() * (max - min + 1)) + min;
+    console.log('randomly generated number between min and max is: ', randomPageAmoung3);
     const possibleListingIds = [10, 7, 4];
     listing_id = possibleListingIds[randomPageAmoung3];
 
