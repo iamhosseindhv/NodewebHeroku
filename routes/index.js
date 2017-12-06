@@ -3,7 +3,8 @@ var request = require('request');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', storeWhoCameIn, function(req, res, next) {
+// router.get('/', storeWhoCameIn, function(req, res, next) {
+router.get('/', function(req, res, next) {
     // properties = {};
     // properties.title = 'Home';
     // properties.activeTab = 'all';
@@ -12,7 +13,7 @@ router.get('/', storeWhoCameIn, function(req, res, next) {
     res.redirect('/s');
 });
 
-
+/*
 function storeWhoCameIn(req, res, next) {
     var ip = req.headers['x-forwarded-for'].split(',').pop() ||
         req.connection.remoteAddress ||
@@ -62,6 +63,6 @@ function getLocInfo(ip, callback) {
             callback(locInfo);
         }
     });
-}
+}*/
 
 module.exports = router;
