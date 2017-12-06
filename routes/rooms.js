@@ -9,11 +9,18 @@ var router = express.Router();
 /* GET home page. */
 router.get('/:id', function(req, res, next) {
     //find listing and render related page
-    const listing_id = req.params.id;
+    var listing_id = req.params.id;
     var properties = {};
     properties.title = 'Rooms';
     properties.isAuthenticated = req.isAuthenticated;
     properties.user = req.user;
+
+    // since not all of the listings have sufficient data,
+    // for the purpose of demonstration, we redirect to one of these random pages
+    const min = 0, max = 2;
+    const randomPageAmoung3 = Math.floor(Math.random() * (max - min + 1)) + min;
+    const possibleListingIds = [10, 7, 4];
+    listing_id = possibleListingIds[randomPageAmoung3];
 
     findListing(listing_id, properties)
         .then(findHost)
