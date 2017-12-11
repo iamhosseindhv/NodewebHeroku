@@ -17,18 +17,16 @@ router.get('/:id', function(req, res, next) {
 
     // since not all of the listings have sufficient data,
     // for the purpose of demonstration, we redirect to one of these random pages
-    // const min = 0, max = 2;
-    // const randomPageAmoung3 = Math.floor(Math.random() * (max - min + 1)) + min;
-    // console.log('randomly generated number between min and max is: ', randomPageAmoung3);
-    // const possibleListingIds = [10, 7, 4];
-    // listing_id = possibleListingIds[randomPageAmoung3];
-    // console.log('listing id, the new one is: ', listing_id);
+    const min = 0, max = 2;
+    const randomPageAmoung3 = Math.floor(Math.random() * (max - min + 1)) + min;
+    const possibleListingIds = [10, 7, 4];
+    listing_id = possibleListingIds[randomPageAmoung3];
+    console.log('listing id: ', listing_id);
 
-    findListing(10, properties)
+    findListing(listing_id, properties)
         .then(findHost)
         .then(function (updatedProperties) {
             if (updatedProperties.listing){
-                updatedProperties.listing.description = 'This is a very beautiful and luxury house in the heart of Edinburgh. you have too book it. I MEAN IT. this is a very beautiful and luxury house in the heart of Edinburgh. you have too book it. I MEAN IT. this is a very beautiful and luxury house in the heart of Edinburgh. you have too book it. I MEAN IT. this is a very beautiful and luxury house in the heart of Edinburgh. you have too book it. I MEAN IT. this is a very beautiful and luxury house in the heart of Edinburgh. you have too book it.';
                 res.render('rooms', updatedProperties);
             } else {
                 res.render('error-rooms');
