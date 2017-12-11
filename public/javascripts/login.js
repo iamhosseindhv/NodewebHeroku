@@ -89,7 +89,11 @@ function handleFormSuccess(data) {
                 if (referer){
                     window.location = '/' + referer;
                 } else {
-                    window.location = '/'
+                    if (window.pathname === '/authenticate'){
+                        window.location = '/'
+                    } else {
+                        window.reload();
+                    }
                 }
             } else {
                 //send verification email and user has to enter code to verify
