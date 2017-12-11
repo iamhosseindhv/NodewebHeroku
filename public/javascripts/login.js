@@ -84,7 +84,8 @@ function handleFormSuccess(data) {
                 //here you should redirect to referer url, (the url user has been redirected from), if any
                 $('.base-layer').css('display', 'none');
                 // location.reload();
-                window.locatio  = '/';
+                // window.location  = '/';
+                window.location  = data.redirectToReferrer;
             } else {
                 //send verification email and user has to enter code to verify
             }

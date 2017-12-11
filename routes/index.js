@@ -10,11 +10,10 @@ router.get('/', function(req, res, next) {
     // properties.activeTab = 'all';
     // properties.isAuthenticated = req.isAuthenticated;
     // res.render('index', properties);
-    console.log('THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS');
     res.redirect('/s');
 });
 
-/*
+
 function storeWhoCameIn(req, res, next) {
     var ip = req.headers['x-forwarded-for'].split(',').pop() ||
         req.connection.remoteAddress ||
@@ -64,6 +63,6 @@ function getLocInfo(ip, callback) {
             callback(locInfo);
         }
     });
-}*/
+}
 
 module.exports = router;
