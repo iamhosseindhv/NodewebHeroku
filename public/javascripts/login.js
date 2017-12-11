@@ -92,7 +92,7 @@ function handleFormSuccess(data) {
                     if (window.pathname === '/authenticate'){
                         window.location = '/'
                     } else {
-                        window.reload();
+                        location.reload();
                     }
                 }
             } else {
