@@ -10,6 +10,7 @@ router.get('/', function(req, res, next) {
     // properties.activeTab = 'all';
     // properties.isAuthenticated = req.isAuthenticated;
     // res.render('index', properties);
+    console.log('THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS THIS');
     res.redirect('/s');
 });
 
