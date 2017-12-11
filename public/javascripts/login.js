@@ -89,7 +89,8 @@ function handleFormSuccess(data) {
                 if (referer){
                     window.location = '/' + referer;
                 } else {
-                    if (window.pathname === '/authenticate'){
+                    console.log('location is: '+location.pathname);
+                    if (location.pathname === '/authenticate'){
                         window.location = '/'
                     } else {
                         location.reload();
