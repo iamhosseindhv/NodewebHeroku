@@ -3,8 +3,8 @@ var request = require('request');
 var router = express.Router();
 
 /* GET home page. */
-router.get('/', storeWhoCameIn, function(req, res, next) {
-// router.get('/', function(req, res, next) {
+// router.get('/', storeWhoCameIn, function(req, res, next) {
+router.get('/', function(req, res, next) {
     // properties = {};
     // properties.title = 'Home';
     // properties.activeTab = 'all';
