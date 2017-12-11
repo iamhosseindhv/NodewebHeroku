@@ -66,7 +66,7 @@ function isAuthenticated(req, res, next) {
     if (req.isAuthenticated === true){
         next();
     } else {
-        res.redirect('/authenticate');
+        res.redirect('/authenticate?referer=dashboard');
     }
 }
 

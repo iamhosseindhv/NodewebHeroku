@@ -84,8 +84,12 @@ function handleFormSuccess(data) {
                 //here you should redirect to referer url, (the url user has been redirected from), if any
                 $('.base-layer').css('display', 'none');
                 // location.reload();
-                // window.location  = '/';
-                window.location  = data.redirectToReferrer;
+                const referer = getQueryVariable('referrer');
+                if (referer){
+                    window.location = '/' + referer;
+                } else {
+                    window.location = '/'
+                }
             } else {
                 //send verification email and user has to enter code to verify
             }
@@ -94,6 +98,17 @@ function handleFormSuccess(data) {
     $('.submit-btn').prop('disabled', false);   //enable button again
 }
 
+function getQueryVariable(variable) {
+    var query = window.location.search.substring(1);
+    var vars = query.split('&');
+    for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split('=');
+        if (decodeURIComponent(pair[0]) == variable) {
+            return decodeURIComponent(pair[1]);
+        }
+    }
+    return false;
+}
 
 
 function handleFormFailure(data) {

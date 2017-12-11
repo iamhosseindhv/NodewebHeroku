@@ -8,18 +8,19 @@ var expressValidator = require('express-validator');
 var router = express.Router();
 const saltRounds = 10;
 
-var redirectToReferrer = '/';
+var redirectToReferrer = '/s';
 
 
 /* GET authentication. */
 router.get('/', function (req, res) {
-    const referrer = req.headers.referer;
-    console.log('referrer is: '+ referrer);
-    if (referrer){
+    const referer = req.headers.referer;
+    console.log('referrer is: ' + referer);
+    console.log(req);
+    if (referer){
         console.log('in the if statement');
         redirectToReferrer = referer;
     }
-    console.log('redirect is: '+redirectToReferrer);
+    console.log('redirect is: ' + redirectToReferrer);
     res.render('authenticate', {
         title: 'Sign in / Login'
     });
