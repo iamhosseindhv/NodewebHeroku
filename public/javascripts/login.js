@@ -85,6 +85,7 @@ function handleFormSuccess(data) {
                 $('.base-layer').css('display', 'none');
                 // location.reload();
                 const referer = getQueryVariable('referrer');
+                console.log(referer);
                 if (referer){
                     window.location = '/' + referer;
                 } else {
