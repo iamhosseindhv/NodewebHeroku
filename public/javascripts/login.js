@@ -84,7 +84,7 @@ function handleFormSuccess(data) {
                 //here you should redirect to referer url, (the url user has been redirected from), if any
                 $('.base-layer').css('display', 'none');
                 // location.reload();
-                const referer = getQueryVariable('referrer');
+                const referer = getQueryVariable('referer');
                 console.log(referer);
                 if (referer){
                     window.location = '/' + referer;
