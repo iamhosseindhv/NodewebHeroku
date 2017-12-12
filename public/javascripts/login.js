@@ -52,9 +52,6 @@ function handleFormSuccess(data) {
     [errorsfield, emailErrors, passwordErrors, passwordMatchErrors].forEach(function (div) {
        $(div).empty();
     });
-    $(errorsfield)
-        .append(data.success)
-        .append(data.status);
 
     if (!data.isValidInputs){
         emails.forEach(function (err) {
@@ -89,7 +86,6 @@ function handleFormSuccess(data) {
                 if (referer){
                     window.location = '/' + referer;
                 } else {
-                    console.log('location is: '+location.pathname);
                     if (location.pathname === '/authenticate'){
                         window.location = '/'
                     } else {
@@ -97,6 +93,10 @@ function handleFormSuccess(data) {
                     }
                 }
             } else {
+                $(errorsfield)
+                    .append(data.success)
+                    .append(data.status)
+                    .append(' (assuming you have verified your account, you can now log in.)');
                 //send verification email and user has to enter code to verify
             }
         }
