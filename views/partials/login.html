@@ -24,7 +24,7 @@
                          <div id="passwordMatch-errors"></div>
                     </div>
                     <button type="submit" class="submit-btn">Sign up</button>
-                    <div id="errors"></div>
+                    <div class="error-container" id="errors"></div>
                     <div class="line-separator"></div>
                     <div class="msg login-msg">
                          <p>Already have an account? <span>Login</span></p>
@@ -123,6 +123,12 @@
           color: #fd5c63;
           font-weight: bold;
           cursor: pointer;
+     }
+     .error-container {
+          margin-top: 15px;
+          text-align: center;
+          font-size: 15px;
+          color: #484848;
      }
      .signup-msg {
           display: none;

@@ -93,11 +93,8 @@ function handleFormSuccess(data) {
                     }
                 }
             } else {
-                $(errorsfield)
-                    .append(data.success)
-                    .append(data.status)
-                    .append(' (assuming you have verified your account, you can now log in.)');
                 //send verification email and user has to enter code to verify
+                $(errorsfield).append('You can now log in. 🙂');
             }
         }
     }
