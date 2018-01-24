@@ -182,7 +182,7 @@
     $('#logout-btn').click(function () {
         $.ajax({
             type: 'POST',
-            url: '/authenticate/logout',
+            url: location.protocol + '//' + location.hostname + '/authenticate/logout',
             success: function(data) {
                 //console.log(data.status);
                 location.reload();

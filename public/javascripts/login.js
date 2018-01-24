@@ -3,7 +3,7 @@
  */
 
 $(document).ready(function(){
-    var formurl = 'https://rentaly.herokuapp.com/authenticate/create';
+    var formurl = location.protocol + '//' + location.hostname + '/authenticate/create';
 
     $('.close-btn').click(function () {
         $('.base-layer').css('display', 'none');
@@ -13,13 +13,13 @@ $(document).ready(function(){
     $('.login-msg').click(function () {
         toggleToLogin();
         $('#errors, #email-errors, #password-errors, #passwordMatch-errors').empty();
-        formurl = 'https://rentaly.herokuapp.com/authenticate';
+        formurl = location.protocol + '//' + location.hostname + '/authenticate';
 
     });
     $('.signup-msg').click(function () {
         toggleToSignup();
         $('#errors, #email-errors, #password-errors, #passwordMatch-errors').empty();
-        formurl = 'https://rentaly.herokuapp.com/authenticate/create';
+        formurl = location.protocol + '//' + location.hostname + '/authenticate/create';
     });
 
 

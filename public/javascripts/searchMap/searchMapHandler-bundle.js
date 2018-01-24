@@ -374,8 +374,6 @@ function loadNewListings(listings, listings_count) {
     $('#main').empty();
     $('#pagination').empty();
 
-    console.log('we are here');
-
     for (var i=0 ; i<listings.length ; i++){
         const listing = listings[i];
 
