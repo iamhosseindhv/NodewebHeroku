@@ -73,8 +73,7 @@ function loadNewListings(listings, listings_count) {
         resultCell.attr("id", listing.id);
         <!---->
         var parentLink = $('<a>').appendTo(resultCell);
-        const link = "../../rooms/" + listing.id + "?" + "queryString consisted of city, " +
-            "checkin-out date, no of guests, no of adults and children";
+        const link = "../../rooms/" + listing.id + "?";
         parentLink.attr("href", link);
         <!---->
         var box = $('<div class="box">').appendTo(parentLink);

@@ -449,7 +449,8 @@ function refresh(parameters) {
         parsed.location = splitted[2];
     }
     //now make ajax request and reload data
-    const url = "https://rentaly.herokuapp.com/api/explore?" + queryString.stringify(parsed);
+    // const url = "https://rentaly.herokuapp.com/api/explore?" + queryString.stringify(parsed);
+    const url = location.protocol + '//' + location.hostname + '/api/explore?' + queryString.stringify(parsed);
     myBundle.queryNewListings(url);
 }
 
