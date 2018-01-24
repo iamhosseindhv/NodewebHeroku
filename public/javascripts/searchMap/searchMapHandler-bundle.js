@@ -349,7 +349,7 @@ var doQueryFromSearchedAddress = function (selectedPlace) {
     //here instead of overwriting url which caused the whole page to reload,
     //you should make a AJAX call to only reload result section of the page
     parsed.location = formattedAddress;
-    const url = "https://rentaly.herokuapp.com/api/explore?" + queryString.stringify(parsed);
+    const url = location.protocol + '//' + location.hostname + '/api/explore?' + queryString.stringify(parsed);
     queryNewListings(url);
 };
 
@@ -381,8 +381,7 @@ function loadNewListings(listings, listings_count) {
         resultCell.attr("id", listing.id);
         <!---->
         var parentLink = $('<a>').appendTo(resultCell);
-        const link = "../../rooms/" + listing.id + "?" + "queryString consisted of city, " +
-            "checkin-out date, no of guests, no of adults and children";
+        const link = "../../rooms/" + listing.id + "?";
         parentLink.attr("href", link);
         <!---->
         var box = $('<div class="box">').appendTo(parentLink);
@@ -397,21 +396,33 @@ function loadNewListings(listings, listings_count) {
         <!---->
         var cellInfo = $('<div class="cell-info">').appendTo(parentLink);
         <!---->
-        var firstRow = $('<div class="cell-info--row">').appendTo(cellInfo);
+        var cellInfoDetail = $('<div class="cell-info-detail">').appendTo(cellInfo);
+        <!---->
+        var firstRow = $('<div class="cell-info--row">').appendTo(cellInfoDetail);
         var price = $('<span class="cell-info--price">').appendTo(firstRow);
-        price.text(listing.price);
+        price.text('£' + listing.price);
         var title = $('<span class="cell-info--title">').appendTo(firstRow);
         title.text(listing.title);
         <!---->
-        var secondRow = $('<div class="cell-info--row">').appendTo(cellInfo);
+        var secondRow = $('<div class="cell-info--row">').appendTo(cellInfoDetail);
         var type = $('<span class="cell-info--type">').appendTo(secondRow);
         type.text(listing.type);
-        var bedCount = $('<span class="cell-info--bedCount">').appendTo(secondRow);
-        bedCount.text(listing.bed_count + " beds");
+        var bedCount = $('<span class="cell-info--bedroomCount">').appendTo(secondRow);
+        bedCount.text(listing.bedroom_count + " Bedroom");
         <!---->
-        var thirdRow = $('<div class="cell-info--row">').appendTo(cellInfo);
-        var review = $('<span class="cell-info--review">').appendTo(thirdRow);
-        review.text(listing.review_count + " reviews");
+        var thirdRow = $('<div class="cell-info--row">').appendTo(cellInfoDetail);
+        var reviewStars = $('<div class="cell-info--review-stars">').appendTo(thirdRow);
+        for (var i=0 ; i<5 ; i++){
+            var startsIndividual = $('<span class="review-stars--individual">').appendTo(reviewStars);
+            var svg = $('<svg viewBox="0 0 1000 1000" role="presentation" focusable="false">').appendTo(startsIndividual);
+            var path = $('<path d="M971.5 379.5c9 28 2 50-20 67L725.4 618.6l87 280.1c11 39-18 75-54 75-12 0-23-4-33-12l-226.1-172-226.1 172.1c-25 17-59 12-78-12-12-16-15-33-8-51l86-278.1L46.1 446.5c-21-17-28-39-19-67 8-24 29-40 52-40h280.1l87-278.1c7-23 28-39 52-39 25 0 47 17 54 41l87 276.1h280.1c23.2 0 44.2 16 52.2 40z">').appendTo(svg);
+        }
+        var reviewCount = $('<div class="cell-info--review-count">').appendTo(thirdRow);
+        reviewCount.text(listing.review_count + " reviews");
+        <!---->
+        var cellInfoHeart = $('<div class="cell-info-heart">').appendTo(cellInfo);
+        var svgheart = $('<svg class="icon-heart" viewBox="0 0 50 50">').appendTo(cellInfoHeart);
+        var pathheart = $('<path xmlns="http://www.w3.org/2000/svg" d="M24.85,10.126c2.018-4.783,6.628-8.125,11.99-8.125c7.223,0,12.425,6.179,13.079,13.543  c0,0,0.353,1.828-0.424,5.119c-1.058,4.482-3.545,8.464-6.898,11.503L24.85,48L7.402,32.165c-3.353-3.038-5.84-7.021-6.898-11.503  c-0.777-3.291-0.424-5.119-0.424-5.119C0.734,8.179,5.936,2,13.159,2C18.522,2,22.832,5.343,24.85,10.126z"/>').appendTo(svgheart);
         <!---->
         createMarker(listing.latitude, listing.longitude, listing.id);
     }
