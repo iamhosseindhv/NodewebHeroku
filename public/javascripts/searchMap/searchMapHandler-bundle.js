@@ -377,8 +377,10 @@ function loadNewListings(listings, listings_count) {
     for (var i=0 ; i<listings.length ; i++){
         const listing = listings[i];
 
-        var resultCell = $('<div class="cell result-cell">').appendTo('#main');
-        resultCell.attr("id", listing.id);
+        var cell = $('<div class="cell">').appendTo('#main');
+        cell.attr("id", listing.id);
+        <!---->
+        var resultCell = $('<div class="result-cell">').appendTo(cell);
         <!---->
         var parentLink = $('<a>').appendTo(resultCell);
         const link = "../../rooms/" + listing.id + "?";

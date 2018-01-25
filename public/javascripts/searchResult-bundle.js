@@ -317,12 +317,11 @@ $(document).ready(function() {
     //when result cell hovered, related marker gets highlighted
     $('.result-cell')
         .mouseenter(function() {
-            resultCellHovered(this.id);
+            resultCellHovered($(this).parent().attr('id'));
         })
         .mouseleave(function() {
-            resultCellUnhovered(this.id);
+            resultCellUnhovered($(this).parent().attr('id'));
         });
-
 
     var toggle = 0;
     $('.toggle-results-map').click(function () {

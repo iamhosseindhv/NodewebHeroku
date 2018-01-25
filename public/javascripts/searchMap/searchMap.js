@@ -158,8 +158,12 @@ function createMarker(lat, lng, id, price) {
     overlay.addListener('click', function (event) {
         const listing_id = this.args.marker_id;
         const listing = $('#main').find('#'+ listing_id);
-        $("#main-wrap").animate({ scrollTop: listing.offset().top }, 300);
-        //highlight the listing for 2 sec
+        $("#main-wrap").animate({ scrollTop: listing.offset().top }, 300, function () {
+            $(listing).css('background-color', 'rgba(77, 148, 255, 0.3)');
+        });
+        setTimeout(function () {
+            $(listing).css('background-color', 'white');
+        }, 1600);
     });
     markers.push(overlay);
 }

@@ -173,20 +173,9 @@ body {
 }
 
 .result-cell {
-    background-color: #fff;
     position: relative;
+    margin-top: 30px !important;
 }
-
-/*.result-cell:after {*/
-    /*background-color: rgba(77, 148, 255, 0.3);*/
-    /*position: absolute;*/
-    /*border-radius: 2px;*/
-    /*content:"";*/
-    /*top: 0;*/
-    /*left: 0;*/
-    /*bottom: 0;*/
-    /*right: 0;*/
-/*}*/
 
 
 .result-cell a {
@@ -217,7 +206,6 @@ body {
     display: table-cell;
     vertical-align: middle;
     padding: 0 21px 0 0;
-    background-color: #fff;
 }
 .icon-heart {
     transition: all 0.3s;
@@ -323,7 +311,9 @@ body {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
-    margin-top: 30px !important;
+    background-color: #fff;
+    -webkit-transition: background-color 0.5s ease-in-out;
+    transition: background-color 0.5s ease-in-out;
 }
 
 .box {
@@ -362,11 +352,11 @@ body {
 
 @media (max-width: 743px) {
     .cell {
-        margin: 8px;
-        width: calc(100% - 16px);
-        width: -o-calc(100% - 16px); /* opera */
-        width: -webkit-calc(100% - 16px); /* google, safari */
-        width: -moz-calc(100% - 16px); /* firefox */
+        padding: 8px;
+        width: calc(100%);
+        width: -o-calc(100%); /* opera */
+        width: -webkit-calc(100%); /* google, safari */
+        width: -moz-calc(100%); /* firefox */
     }
     .head {
         border-bottom: 1px solid #dcdcdc;
@@ -380,11 +370,11 @@ body {
 
 @media (min-width: 744px) and (max-width: 1439px) {
     .cell {
-        margin: 8px;
-        width: calc(50% - 16px);
-        width: -o-calc(50% - 16px); /* opera */
-        width: -webkit-calc(50% - 16px); /* google, safari */
-        width: -moz-calc(50% - 16px); /* firefox */
+        padding: 8px;
+        width: calc(50%);
+        width: -o-calc(50%); /* opera */
+        width: -webkit-calc(50%); /* google, safari */
+        width: -moz-calc(50%); /* firefox */
     }
     .barWrapper-1, .barWrapper-2 {
         width: calc(33.3333% - 16px);
@@ -398,11 +388,11 @@ body {
 
 @media (min-width: 1440px) {
     .cell {
-        margin: 8px;
-        width: calc(33.3333% - 16px);
-        width: -o-calc(33.3333% - 16px); /* opera */
-        width: -webkit-calc(33.3333% - 16px); /* google, safari */
-        width: -moz-calc(33.3333% - 16px); /* firefox */
+        padding: 8px;
+        width: calc(33.3333%);
+        width: -o-calc(33.3333%); /* opera */
+        width: -webkit-calc(33.3333%); /* google, safari */
+        width: -moz-calc(33.3333%); /* firefox */
     }
 }
 
