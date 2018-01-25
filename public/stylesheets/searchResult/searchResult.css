@@ -174,7 +174,20 @@ body {
 
 .result-cell {
     background-color: #fff;
+    position: relative;
 }
+
+/*.result-cell:after {*/
+    /*background-color: rgba(77, 148, 255, 0.3);*/
+    /*position: absolute;*/
+    /*border-radius: 2px;*/
+    /*content:"";*/
+    /*top: 0;*/
+    /*left: 0;*/
+    /*bottom: 0;*/
+    /*right: 0;*/
+/*}*/
+
 
 .result-cell a {
     cursor: pointer;
@@ -186,6 +199,7 @@ body {
     position: relative;
     padding-top: 66.66%; /* 3:2 Aspect Ratio */
     width: 100%;
+    z-index: 1;
 }
 
 .cell-thumbnail img {
@@ -325,6 +339,23 @@ body {
     right: 0;
 }
 
+
+.customMarker {
+    background-color: white;
+    border-radius: 3px;
+    color: #484848;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15) !important;
+    position: absolute;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500 !important;
+    padding: 4px 8px;
+}
+.customMarker-hovered {
+    background-color: #beb05b;
+    color: #fff;
+    z-index: 1999;
+}
 
 
 

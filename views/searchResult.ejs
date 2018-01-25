@@ -179,12 +179,11 @@
     <script>
         function mapLoaded() {
             <% listings.forEach(function(record){ %>
-            createMarker(<%= record.latitude %>, <%= record.longitude %>, <%= record.id %>);
+            createMarker(<%= record.latitude %>, <%= record.longitude %>, <%= record.id %>, <%= record.price %>);
             <% }); %>
             fitMarkers();
         }
         myModule.createPagination(<%= listings_count %>);
-
 
 
     </script>

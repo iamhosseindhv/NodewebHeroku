@@ -320,11 +320,7 @@ $(document).ready(function() {
             resultCellHovered(this.id);
         })
         .mouseleave(function() {
-            for (var i=0; i<markers.length; i++){
-                if (markers[i].id == this.id){
-                    markers[i].setIcon(null);
-                }
-            }
+            resultCellUnhovered(this.id);
         });
 
 

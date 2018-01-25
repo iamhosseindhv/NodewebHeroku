@@ -8,6 +8,11 @@ var allowSearchByMap = false;
 var autocomplete;
 var map;
 
+function CustomMarker(latlng, map, args) {
+    this.latlng = latlng;
+    this.args = args;
+    this.setMap(map);
+}
 
 function initAutocomplete() {
     var input = document.getElementById('autocomplete');
@@ -110,29 +115,18 @@ function itemDidSelect() {
     myBundle.doQueryFromSearchedAddress(place);
 }
 
-function CustomMarker(latlng, map, args) {
-    this.latlng = latlng;
-    this.args = args;
-    this.setMap(map);
-}
 
 //creates new markers
 var markers = [];
-function createMarker(lat, lng, id) {
-
+function createMarker(lat, lng, id, price) {
     CustomMarker.prototype = new google.maps.OverlayView();
     CustomMarker.prototype.draw = function() {
-
         var self = this;
         var div = this.div;
         if (!div) {
             div = this.div = document.createElement('div');
-            div.className = 'marker';
-            div.style.position = 'absolute';
-            div.style.cursor = 'pointer';
-            div.style.width = '20px';
-            div.style.height = '20px';
-            div.style.background = 'blue';
+            div.innerHTML = '£' + price;
+            div.classList.add('customMarker');
             if (typeof(self.args.marker_id) !== 'undefined') {
                 div.dataset.marker_id = self.args.marker_id;
             }
@@ -148,37 +142,25 @@ function createMarker(lat, lng, id) {
             div.style.top = point.y + 'px';
         }
     };
-
     CustomMarker.prototype.remove = function() {
         if (this.div) {
             this.div.parentNode.removeChild(this.div);
             this.div = null;
         }
     };
-
     CustomMarker.prototype.getPosition = function() {
         return this.latlng;
     };
 
-    // const point = new google.maps.LatLng(
-    //     parseFloat(lat),
-    //     parseFloat(lng));
-    // const marker = new google.maps.Marker({
-    //     map: map,
-    //     id: id,
-    //     position: point,
-    //     optimized: true,
-    //     zIndex: 3999
-    // });
     var myLatlng = new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
-    var overlay = new CustomMarker(myLatlng, map,
-        {
-            marker_id: id
-        }
-    );
-    // overlay.remove();
-    // console.log(overlay.getPosition());
-    // markers.push(marker);
+    var overlay = new CustomMarker(myLatlng, map, { marker_id: id});
+    // Make markers clickable
+    overlay.addListener('click', function (event) {
+        const listing_id = this.args.marker_id;
+        const listing = $('#main').find('#'+ listing_id);
+        $("#main-wrap").animate({ scrollTop: listing.offset().top }, 300);
+        //highlight the listing for 2 sec
+    });
     markers.push(overlay);
 }
 
@@ -200,12 +182,20 @@ function clearMarkers() {
     markers = [];
 }
 
-
 //when result cell gets hovered
 function resultCellHovered(id) {
     for (var i=0; i<markers.length; i++){
-        if (markers[i].id == id){
-            markers[i].setIcon('https://maps.google.com/mapfiles/ms/icons/green-dot.png');
+        if (markers[i].args.marker_id == id){
+            markers[i].div.classList.add('customMarker-hovered');
+        }
+    }
+}
+
+//when the mouse leaves result cell
+function resultCellUnhovered(id) {
+    for (var i=0; i<markers.length; i++){
+        if (markers[i].args.marker_id == id){
+            markers[i].div.classList.remove('customMarker-hovered');
         }
     }
 }
