@@ -89,7 +89,7 @@ function CenterControl(controlDiv, map) {
     controlText.style.lineHeight = '20px';
     controlText.style.paddingLeft = '5px';
     controlText.style.paddingRight = '5px';
-    controlText.innerHTML = 'Search with map';
+    controlText.innerHTML = 'Search by map';
     controlUI.appendChild(controlText);
     controlUI.addEventListener('click', allowSearchByMapHandler);
 }

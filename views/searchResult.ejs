@@ -31,44 +31,9 @@
     <% include partials/login.html %>
 
     <div class="head">
-        <div class="grid" style="direction: rtl;">
+        <div class="grid" style="direction: rtl; background-color: red">
             <div class="barWrapper-1">
                 <input id="autocomplete" placeholder="Enter your address" type="text" value="<%= location %>">
-            </div>
-            <div class="barWrapper-2">
-                <span>
-                    <input readonly type="text" id="to-date" placeholder="Check-out">
-                </span>
-                <span>
-                    <input readonly type="text" id="from-date" placeholder="Check-in">
-                </span>
-                <span>
-                    <button class="search-btn" onclick="myModule.searchDates()">Search</button>
-                </span>
-            </div>
-            <div class="barWrapper-3">
-                <select id="guestPicker" class="input-select">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                </select>
-                <span class="dropdown-icon">
-                    <svg viewBox="0 0 18 18" role="presentation" aria-hidden="true" focusable="false" style="display:block; fill:#484848; height:12px; width:12px;">
-                        <path fill-rule="evenodd" d="M16.291 4.295a1 1 0 1 1 1.414 1.415l-8 7.995a1 1 0 0 1-1.414 0l-8-7.995a1 1 0 1 1 1.414-1.415l7.293 7.29 7.293-7.29z"></path>
-                    </svg>
-                </span>
             </div>
             <div class="barWrapper-4">
                 <ul>
@@ -88,12 +53,61 @@
     </div>
 
 
+
+
     <div id="content-wrap">
         <div class="toggle-results-map">Map</div>
 
         <!--fetch results here-->
         <div id="main-wrap">
             <div class="overlay"></div>
+            <div class="filters">
+                <div class="filters-header">Filters</div>
+                <div class="filters-row grid">
+                    <div class="filters-row-one">
+                        <div class="filters-checkin" style="background-color: white">
+                            <span>
+                                <input readonly type="text" id="from-date" placeholder="Check-in">
+                            </span>
+                        </div>
+                        <div class="filters-checkout">
+                            <span>
+                                <input readonly type="text" id="to-date" placeholder="Check-out">
+                            </span>
+                        </div>
+                        <div class="filters-guest">
+                            <select id="guestPicker" class="input-select">
+                                <option value="1">1 Person</option>
+                                <option value="2">2 Person</option>
+                                <option value="3">3 Person</option>
+                                <option value="4">4 Person</option>
+                                <option value="5">5 Person</option>
+                                <option value="6">6 Person</option>
+                                <option value="7">7 Person</option>
+                                <option value="8">8 Person</option>
+                                <option value="9">9 Person</option>
+                                <option value="10">10 Person</option>
+                                <option value="11">11 Person</option>
+                                <option value="12">12 Person</option>
+                                <option value="13">13 Person</option>
+                                <option value="14">14 Person</option>
+                                <option value="15">15 Person</option>
+                            </select>
+                            <span class="filters-guest--dropdown-icon">
+                                <svg viewBox="0 0 18 18" role="presentation" aria-hidden="true" focusable="false" style="display:block; fill:#484848; height:12px; width:12px;">
+                                    <path fill-rule="evenodd" d="M16.291 4.295a1 1 0 1 1 1.414 1.415l-8 7.995a1 1 0 0 1-1.414 0l-8-7.995a1 1 0 1 1 1.414-1.415l7.293 7.29 7.293-7.29z"></path>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="filters-searchbtn">
+                            <button class="search-btn" onclick="myModule.searchDates()">Search</button>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="filters-row grid" style="background-color: blue">d2222222flk</div>-->
+                <div class="filters-header" style="margin-bottom: 0">Results</div>
+
+            </div>
             <div id="main" class="grid">
                 <% listings.forEach(function(record){ %>
                 <div id="<%= record.id %>" class="cell">
@@ -173,9 +187,6 @@
         <div id="sidebar-wrap"><div id="map"></div></div>
 
     </div>
-
-
-
 
 
     <script>
