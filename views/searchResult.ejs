@@ -31,23 +31,36 @@
     <% include partials/login.html %>
 
     <div class="head">
-        <div class="grid" style="direction: rtl; background-color: red">
+        <div class="" style="padding: 8px;">
             <div class="barWrapper-1">
-                <input id="autocomplete" placeholder="Enter your address" type="text" value="<%= location %>">
+                <input id="autocomplete" placeholder="City, province or address" type="text" value="<%= location %>">
             </div>
-            <div class="barWrapper-4">
-                <ul>
-                    <li class="head-li">
-                        <% if (isAuthenticated) { %>
-                        <span class="head-item" id="logout-btn">Logout</span>
-                        <% } else { %>
-                        <span class="head-item" id="login-signin-btn">Login / Sign Up</span>
-                        <% } %>
-                    </li>
-                    <li class="head-li" id="logo">
-                        <span class="head-item">LOGO HERE</span>
-                    </li>
-                </ul>
+            <div class="barWrapper-2">
+                <div style="display: inline-block;">
+                    <ul class="head-ul">
+                        <li class="head-li" id="logo">
+                            <span class="head-item">LOGO</span>
+                        </li>
+                        <li class="head-li head-dropdown">.
+                            <span class="dropdown-icon head-item-dropdown">
+                                <svg viewBox="0 0 18 18" role="presentation" aria-hidden="true" focusable="false" style="display:block; fill:#484848; height:12px; width:12px;">
+                                    <path fill-rule="evenodd" d="M16.291 4.295a1 1 0 1 1 1.414 1.415l-8 7.995a1 1 0 0 1-1.414 0l-8-7.995a1 1 0 1 1 1.414-1.415l7.293 7.29 7.293-7.29z"></path>
+                                </svg>
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+                <div id="responsive-item">
+                    <ul class="head-ul">
+                        <li class="head-li">
+                            <% if (isAuthenticated) { %>
+                            <span class="head-item" id="logout-btn">Logout</span>
+                            <% } else { %>
+                            <span class="head-item" id="login-signin-btn">Login / Sign Up</span>
+                            <% } %>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -62,8 +75,18 @@
         <div id="main-wrap">
             <div class="overlay"></div>
             <div class="filters">
-                <div class="filters-header">Filters</div>
-                <div class="filters-row grid">
+                <!--<div class="filters-separator"></div>-->
+                <div class="filters-row">
+                    <div class="modify-filters-btn">
+                        <span>Modify filters</span>
+                        <span class="dropdown-icon modify-filters-dropdown transform">
+                            <svg viewBox="0 0 18 18" role="presentation" aria-hidden="true" focusable="false" style="display:block; fill:#484848; height:12px; width:12px;">
+                                <path fill-rule="evenodd" d="M16.291 4.295a1 1 0 1 1 1.414 1.415l-8 7.995a1 1 0 0 1-1.414 0l-8-7.995a1 1 0 1 1 1.414-1.415l7.293 7.29 7.293-7.29z"></path>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+                <div id="myfilters" class="filters-row grid">
                     <div class="filters-row-one">
                         <div class="filters-checkin" style="background-color: white">
                             <span>
@@ -93,7 +116,7 @@
                                 <option value="14">14 Person</option>
                                 <option value="15">15 Person</option>
                             </select>
-                            <span class="filters-guest--dropdown-icon">
+                            <span class="dropdown-icon filters-guest-dropdown">
                                 <svg viewBox="0 0 18 18" role="presentation" aria-hidden="true" focusable="false" style="display:block; fill:#484848; height:12px; width:12px;">
                                     <path fill-rule="evenodd" d="M16.291 4.295a1 1 0 1 1 1.414 1.415l-8 7.995a1 1 0 0 1-1.414 0l-8-7.995a1 1 0 1 1 1.414-1.415l7.293 7.29 7.293-7.29z"></path>
                                 </svg>
@@ -104,9 +127,7 @@
                         </div>
                     </div>
                 </div>
-                <!--<div class="filters-row grid" style="background-color: blue">d2222222flk</div>-->
-                <div class="filters-header" style="margin-bottom: 0">Results</div>
-
+                <div class="filters-separator" style="margin-bottom: 0"></div>
             </div>
             <div id="main" class="grid">
                 <% listings.forEach(function(record){ %>
@@ -175,8 +196,8 @@
                 <div class="mdl-mini-footer__left-section">
                     <div class="mdl-logo">Title</div>
                     <ul class="mdl-mini-footer__link-list">
-                        <li><a href="#">Terms of Use</a></li>
-                        <li><a href="#">Privacy & Policy</a></li>
+                        <!--<li><a href="#">Terms of Use</a></li>-->
+                        <!--<li><a href="#">Privacy & Policy</a></li>-->
                         <li><a href="#" id="footer-listing-count"><%= listings_count %></a></li>
                     </ul>
                 </div>
@@ -198,11 +219,25 @@
         }
         myModule.createPagination(<%= listings_count %>);
 
+        $('.modify-filters-btn').click(function () {
+            var title = $(this);
+            var filters = $('#myfilters');
+            filters.slideToggle(500, function () {
+                $('.modify-filters-dropdown').toggleClass('transform');
+            });
+        });
+
+        $('.head-dropdown').click(function () {
+            $('.barWrapper-1').toggle();
+            $('.barWrapper-2').toggleClass('full-width');
+            var li = $('#responsive-item');
+            li.toggleClass('hideit');
+            $('.head-item-dropdown').toggleClass('transform-90');
+        });
 
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYmqhY-KcOz1kHrx6JlKK7Qgsl
     oTZNRp8&libraries=places&callback=initAutocomplete" onload="mapLoaded()"></script>
-
 
 </body>
 </html>
