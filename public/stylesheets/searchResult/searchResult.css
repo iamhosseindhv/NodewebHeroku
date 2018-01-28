@@ -26,7 +26,8 @@ body {
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
     float:right;
     width:65%;
-    overflow:auto;
+    overflow-y:scroll;
+    -webkit-overflow-scrolling: touch;
     background-color: #ffffff;
 }
 
