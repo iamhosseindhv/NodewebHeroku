@@ -3,6 +3,7 @@ body {
     padding: 0;
     height:100%;
     width:100%;
+    overflow-y: hidden;
 }
 #content-wrap{
     overflow:auto;
@@ -28,6 +29,7 @@ body {
     width:65%;
     overflow-y:scroll;
     -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
     background-color: #ffffff;
 }
 
