@@ -15,13 +15,15 @@ router.get('/:id', function(req, res, next) {
     properties.isAuthenticated = req.isAuthenticated;
     properties.user = req.user;
 
-    // since not all of the listings have sufficient data,
-    // for the purpose of demonstration, we redirect to one of these random pages
-    const min = 0, max = 2;
-    const randomPageAmoung3 = Math.floor(Math.random() * (max - min + 1)) + min;
-    const possibleListingIds = [10, 7, 4];
-    listing_id = possibleListingIds[randomPageAmoung3];
-    console.log('listing id: ', listing_id);
+
+    if (listing_id > 125915596){
+        // for listings not on the first page, i.e. which don't have thumbnail image,
+        // for the purpose of demonstration, we redirect to one of these random pages
+        const min = 0, max = 2;
+        const randomPageAmoung3 = Math.floor(Math.random() * (max - min + 1)) + min;
+        const possibleListingIds = [10, 7, 4];
+        listing_id = possibleListingIds[randomPageAmoung3];
+    }
 
     findListing(listing_id, properties)
         .then(findHost)
