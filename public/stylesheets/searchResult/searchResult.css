@@ -32,6 +32,39 @@ body {
     overflow-scrolling: touch;
     background-color: #ffffff;
 }
+.disclaimer {
+    background-color: #484848;
+    box-sizing: border-box;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1999;
+    padding: 8px 32px;
+    color: #dcdcdc;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+.disclaimer p {
+    padding: 0 !important;
+    margin: 0 !important;
+    line-height: 18px;
+}
+.disclaimer-close {
+    position: absolute;
+    right: 10px;
+    top: 16px;
+    border: none;
+    margin-bottom: 14px;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+}
+.disclaimer-close svg {
+    display: block;
+    fill: rgb(220, 220, 220);
+    height: 16px;
+    width: 16px;
+}
 
 
 
@@ -42,8 +75,13 @@ body {
     width: 100%;
     min-height: 70px !important;
     box-sizing: border-box;
-    border-bottom: 1px solid transparent;
+    border-bottom: 1px solid #dcdcdc;
     position: relative;
+    background: #f9f9f9; /* Old browsers */
+    background: -moz-linear-gradient(top, #f9f9f9 0%, #ffffff 66%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #f9f9f9 0%,#ffffff 66%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #f9f9f9 0%,#ffffff 66%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9f9f9', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
 }
 .barWrapper-1 {
     /*background-color: red;*/
@@ -545,6 +583,13 @@ body {
     }
     .search-by-map {
         display: none;
+    }
+    .disclaimer {
+        padding: 8px 16px;
+    }
+    .disclaimer p {
+        font-size: 12px;
+
     }
 }
 

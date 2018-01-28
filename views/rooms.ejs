@@ -175,7 +175,13 @@
                                 </div>
                             </div>
                             <div class="innercol-row border-free">
-                                <div class="listing-description"><%= listing.description %></div>
+                                <!--<div class="listing-description"><%= listing.description %></div>-->
+                                <div class="listing-description">
+                                    <p>This is an exclusive-use lodge, booked out entirely for a group of travellers, for up to 6 guests. The individual villas each overlook a spectacular view of the fertile and wild Welgevonden Game Reserve.</p>
+                                    <p>This Big 5 game reserve is teeming with a plethora of wild animals, big and small. A full-time staff is always on hand to assist with whatever is required, while a safari guide with 20 years of experience under his belt is available to guests for twice-daily game drives of the reserve.
+                                        Guest access</p>
+                                    <p>Settled into the natural setting at Izingwe are three smaller villas or lodges and a main lodge. Single-party bookings ensure that guests are ensured the utmost privacy at Izingwe Lodge, while still being able to enjoy the facilities here.</p>
+                                </div>
                             </div>
                         </div>
                         <div id="host">
@@ -186,10 +192,15 @@
                                     <div class="listing-hostregistrationdate">With us since <%= host.registration_month %> <%= host.registration_year %></div>
                                 </div>
                                 <div class="innercol--hostavatar">
-                                    <div class="listing-hostavatar" style="background-image: url(<%= host.profile_img %>)"></div>
+                                    <!--<div class="listing-hostavatar" style="background-image: url(<%= host.profile_img %>)"></div>-->
+                                    <div class="listing-hostavatar" style="background-image: url('https://image.ibb.co/gvh5Yw/thumb_IMG_9393_1024.jpg')"></div>
                                 </div>
+                                <!--<div class="innercol&#45;&#45;hostbio"><%= host.bio %></div>-->
                                 <div class="innercol--hostbio">
-                                    <%= host.bio %>
+                                    <p>Well this is a sample bio or my profile on Rentaly and it's just for the purpose of demonstration.</p>
+                                    <p>Also, some pages in this website require the user to be logged in. For the purpose of demonstration and for having a better user experience, you may want to login as the following user:
+                                        email: guestUser@gmail.co.uk | Pass: 42214221Dd</p>
+                                    <p>Hope you a nice stay at my place! Much love ❤️️</p>
                                 </div>
                                 <div class="innercol--hostcontact">
                                     <button class="listing-hostcontact">Ask host a question</button>

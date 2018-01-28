@@ -340,6 +340,26 @@ $(document).ready(function() {
         }
     });
 
+    $('.modify-filters-btn').click(function () {
+        var title = $(this);
+        var filters = $('#myfilters');
+        filters.slideToggle(500, function () {
+            $('.modify-filters-dropdown').toggleClass('transform');
+        });
+    });
+
+    $('.head-dropdown').click(function () {
+        $('.barWrapper-1').toggle();
+        $('.barWrapper-2').toggleClass('full-width');
+        var li = $('#responsive-item');
+        li.toggleClass('hideit');
+        $('.head-item-dropdown').toggleClass('transform-90');
+    });
+
+    $('.disclaimer-close').click(function () {
+        $('.disclaimer').hide();
+    });
+
     const customOptions = {
         placeholder: "روز / ماه / سال",
         twodigit: true,
