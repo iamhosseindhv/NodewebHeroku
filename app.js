@@ -8,6 +8,8 @@ var expressValidator = require('express-validator');
 var dotenv = require('dotenv');
 var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 var cookieSession = require('cookie-session');
+var forceSSL = require('express-force-ssl');
+
 
 
 var index = require('./routes/index');
@@ -30,6 +32,7 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(forceSSL);
 app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
