@@ -8,7 +8,6 @@ var expressValidator = require('express-validator');
 var dotenv = require('dotenv');
 var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 var cookieSession = require('cookie-session');
-var forceSSL = require('express-force-ssl');
 
 
 
@@ -32,7 +31,6 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(forceSSL);
 app.use(expressValidator());
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -40,6 +38,7 @@ app.use(cookieSession({ name: 'session', secret: process.env.COOKIE_SESSION_SECR
 
 
 app.use(authenticateRequest);
+app.use(forceSSL);
 app.use('/', index);
 app.use('/s', s);
 app.use('/rooms', rooms);
@@ -65,6 +64,11 @@ app.use(function(err, req, res, next) {
      res.status(err.status || 500);
      res.render('error');
 });
+
+function forceSSL(req, res, next){
+    console.log(req);
+    next();
+}
 
 
 function authenticateRequest(req, res, next) {
