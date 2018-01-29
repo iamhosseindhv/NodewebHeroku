@@ -1,5 +1,6 @@
 var express = require('express');
 var path = require('path');
+var parseUrl = require('url').parse;
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -8,7 +9,6 @@ var expressValidator = require('express-validator');
 var dotenv = require('dotenv');
 var jwt = require('jsonwebtoken'); // used to create, sign, and verify tokens
 var cookieSession = require('cookie-session');
-
 
 
 var index = require('./routes/index');
@@ -38,6 +38,7 @@ app.use(cookieSession({ name: 'session', secret: process.env.COOKIE_SESSION_SECR
 
 
 app.use(authenticateRequest);
+app.use(forceSSL);
 app.use('/', index);
 app.use('/s', s);
 app.use('/rooms', rooms);
@@ -63,6 +64,19 @@ app.use(function(err, req, res, next) {
      res.status(err.status || 500);
      res.render('error');
 });
+
+function forceSSL(req, res, next) {
+    var xfpHeader = req.get('X-Forwarded-Proto');
+    if (xfpHeader !== 'https'){
+        const fullUrl = parseUrl(req.protocol + '://' + req.header('Host') + req.originalUrl);
+
+        //intentionally allow coercion of https port
+        const redirectUrl = 'https://' + fullUrl.hostname + req.originalUrl;
+        // res.redirect(redirectUrl)
+        console.log(redirectUrl)
+    }
+    next()
+}
 
 
 function authenticateRequest(req, res, next) {
