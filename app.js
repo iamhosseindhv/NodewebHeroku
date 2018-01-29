@@ -38,7 +38,7 @@ app.use(cookieSession({ name: 'session', secret: process.env.COOKIE_SESSION_SECR
 
 
 app.use(authenticateRequest);
-// app.use(forceSSL);
+app.use(forceSSL);
 app.use('/', index);
 app.use('/s', s);
 app.use('/rooms', rooms);
