@@ -38,7 +38,6 @@ app.use(cookieSession({ name: 'session', secret: process.env.COOKIE_SESSION_SECR
 
 
 app.use(authenticateRequest);
-app.use(forceSSL);
 app.use('/', index);
 app.use('/s', s);
 app.use('/rooms', rooms);
@@ -64,11 +63,6 @@ app.use(function(err, req, res, next) {
      res.status(err.status || 500);
      res.render('error');
 });
-
-function forceSSL(req, res, next){
-    console.log(req);
-    next();
-}
 
 
 function authenticateRequest(req, res, next) {
