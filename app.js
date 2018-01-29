@@ -73,9 +73,11 @@ function forceSSL(req, res, next) {
         //intentionally allow coercion of https port
         const redirectUrl = 'https://' + fullUrl.hostname + req.originalUrl;
         // res.redirect(redirectUrl)
-        console.log(redirectUrl)
+        console.log('REDIRECT URL IS: ' + redirectUrl);
+        res.redirect(redirectUrl);
+    } else {
+        next()
     }
-    next()
 }
 
 
